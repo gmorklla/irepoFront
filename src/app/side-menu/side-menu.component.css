@@ -1,0 +1,81 @@
+.logo {
+    width: 100%;
+    background-color: #2196f3;
+    margin: 10px 0;
+    padding: 10px 0;
+}
+
+.logo p {
+    padding-left: 15px;
+    margin: 0;
+}
+
+.logo img {
+    width: 150px;
+}
+
+.sections {
+    background-color: rgb(240, 240, 240);
+    outline: none;
+    color: lightgray;
+    margin-bottom: 2px;
+}
+
+.active {
+    cursor: pointer;
+    background-color: transparent !important;
+    color: #448aff !important;
+    cursor: pointer;
+}
+
+.active:hover {
+    background-color: rgb(235, 247, 255) !important;
+}
+
+.hoursList {
+    display: flex;
+    flex-flow: column;
+    flex-wrap: wrap;
+}
+
+.hoursList h3 {
+    flex: 1 0 100%;
+}
+
+.hourList mat-list-item {
+    flex: 1 0 100%;
+}
+
+.date {
+    font-weight: bolder !important;
+    font-size: small !important;
+}
+
+.hours {
+    color: teal !important;
+    font-size: smaller !important;
+    text-transform: uppercase !important;
+    font-weight: bolder !important;
+}
+
+.expense {
+    color: #673AB7 !important;
+    margin-top: 5px !important;
+    width: 150px;
+}
+
+.type {
+    margin-bottom: 5px !important;
+    font-size: small !important;
+    display: flex !important;
+    align-items: center;
+    justify-content: space-between;
+    width: auto;
+}
+
+.type mat-icon {
+    cursor: pointer;
+    font-size: small;
+    width: auto;
+    height: auto;
+}

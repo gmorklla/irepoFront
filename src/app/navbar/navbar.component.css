@@ -1,0 +1,34 @@
+.spacer {
+    flex: 1 1 auto;
+}
+
+.icon {
+    padding: 0 14px;
+}
+
+.menu {
+    margin: 0 14px !important;
+}
+
+mat-icon {
+    outline: none;
+    cursor: pointer;
+}
+
+.permissions {
+    background-color: black;
+}
+
+.spacer {
+    flex: 1 1 auto;
+}
+
+.name {
+    letter-spacing: 5px;
+}
+
+@media all and (max-width: 800px) {
+    .name {
+        letter-spacing: 0;
+    }
+}

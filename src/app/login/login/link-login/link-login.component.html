@@ -1,0 +1,20 @@
+
+  <ng-container *ngIf="user; else login">
+
+    <div class="notification">
+      <p>Welcome {{user.email}}!</p>
+      <hr>
+      <p><button mat-raised-button color="warn" (click)="logout()" class="button">Signout</button></p>
+    </div>
+
+  </ng-container>
+
+  <ng-template #login>
+    <mat-form-field [floatLabel]="'never'">
+      <input placeholder="User email" matInput type="email" email [(ngModel)]="email">
+    </mat-form-field>
+
+    <button mat-raised-button color="primary" [disabled]="emailSent" (click)="sendEmailLink(email)">Get login link</button>
+
+  </ng-template>
+

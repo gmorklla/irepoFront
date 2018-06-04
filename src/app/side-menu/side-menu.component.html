@@ -1,0 +1,26 @@
+<div class="logo">
+  <p><img src="./assets/images/intelma.svg"></p>
+</div>
+<mat-list>
+  <h3 mat-subheader>Sections</h3>
+  <mat-list-item *ngFor="let section of sections; let i = index" class="sections" [routerLink]="routes[i].active ? '/' + section.url : null" [ngClass]="routes[i].active ? 'active' : null" (click)="linkClicked()">
+    <mat-icon mat-list-icon>{{section.icon}}</mat-icon>
+    <h4 mat-line>{{section.name}}</h4>
+  </mat-list-item>
+  <mat-divider></mat-divider>
+  <!-- /////////////////////////////////// Notifications /////////////////////////////////// -->
+  <h3 mat-subheader *ngIf="notifications.length > 0">Notifications</h3>
+  <mat-list-item *ngFor="let notification of notifications" class="hoursList" (dblclick)="deleteNotif(notification)">
+    <mat-icon mat-list-icon color="primary" *ngIf="notification.status === 'Accepted' || notification.status === 'Assigned'; else rejected" matTooltip="{{notification.status}}" [matTooltipPosition]="'right'">done</mat-icon>
+    <ng-template #rejected>
+      <mat-icon mat-list-icon color="warn" matTooltip="Rejected" [matTooltipPosition]="'right'">report_problem</mat-icon>
+    </ng-template>
+    <h4 mat-line class="type">
+      {{notification.type}}
+      <mat-icon (click)="deleteNotif(notification)">close</mat-icon>
+    </h4>
+    <hr mat-line>
+    <p mat-line class="hours expense">{{notification.message}}</p>
+    <p mat-line class="date">{{notification.date | date: 'MMM d, y'}}</p>
+  </mat-list-item>
+</mat-list>

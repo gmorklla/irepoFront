@@ -1,0 +1,19 @@
+<!-- Navbar -->
+<mat-toolbar color="primary">
+    <mat-toolbar-row>
+        <button mat-icon-button class="menu" (click)="toggle()">
+            <mat-icon aria-label="Menu">menu</mat-icon>
+        </button>
+        <span matTooltip="Intelma Repository" [matTooltipPosition]="'right'" class="name">IRepo</span>
+        <span class="spacer"></span>
+        <button mat-icon-button [routerLink]="'/'">
+            <mat-icon aria-label="Home">home</mat-icon>
+        </button>
+    </mat-toolbar-row>
+    <mat-toolbar-row class="permissions" *ngIf="showSubNav">
+        <span style="font-size: small;">Get notifications?</span>
+        <span class="spacer"></span>
+        <button mat-button color="accent" (click)="getPermission(true)">Accept</button>
+        <button mat-button color="warn" (click)="getPermission(false)">Later</button>
+    </mat-toolbar-row>
+</mat-toolbar>
