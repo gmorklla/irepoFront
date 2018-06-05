@@ -1,0 +1,9 @@
+<h3 class="title">
+  <mat-icon>account_circle</mat-icon>
+  Users
+</h3>
+<mat-card [@appear]="appearIn">
+  <mat-card-content>
+    <app-users-table *ngIf="users" [objForTable]="users"></app-users-table>
+  </mat-card-content>
+</mat-card>

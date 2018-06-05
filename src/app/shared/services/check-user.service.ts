@@ -2,11 +2,8 @@ import { Injectable } from '@angular/core';
 import { AngularFireAuth } from 'angularfire2/auth';
 import * as firebase from 'firebase/app';
 import { EmitterService } from '../../shared/services/emitter.service';
-import { BehaviorSubject } from 'rxjs/BehaviorSubject';
-import { Observable } from 'rxjs/Observable';
-import 'rxjs/add/observable/of';
-import 'rxjs/add/operator/switchMap';
-import 'rxjs/add/operator/take';
+import { BehaviorSubject } from 'rxjs-compat/BehaviorSubject';
+import { Observable } from 'rxjs-compat';
 
 @Injectable()
 export class CheckUserService {

@@ -39,7 +39,6 @@ export class LinkLoginComponent implements OnInit {
       .subscribe(user => {
         EmitterService.get('load').emit(false);
         this.user = user;
-        user ? EmitterService.get('logIn').emit(true) : EmitterService.get('logIn').emit(false);
       });
 
     const url = this.router.url;

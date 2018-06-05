@@ -1,0 +1,40 @@
+<div class="container">
+  <div class="table">
+    <div class="header">
+      <mat-form-field>
+        <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter by email">
+      </mat-form-field>
+    </div>
+    <mat-table #table [dataSource]="dataSource" matSort>
+
+      <!-- Delete Column -->
+      <ng-container matColumnDef="delete">
+        <mat-header-cell *matHeaderCellDef> Delete </mat-header-cell>
+        <mat-cell *matCellDef="let row">
+          <button mat-icon-button color="warn" (click)="deleteUser(row)">
+            <mat-icon aria-label="Change role">delete</mat-icon>
+          </button>
+        </mat-cell>
+      </ng-container>
+
+      <!-- Day Column -->
+      <ng-container matColumnDef="email">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> User </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.email}} </mat-cell>
+      </ng-container>
+
+      <!-- Task Column -->
+      <ng-container matColumnDef="created">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Created </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.created | date}} </mat-cell>
+      </ng-container>
+
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    </mat-table>
+    <mat-paginator #paginator
+                  [pageSize]="5"
+                  [pageSizeOptions]="[5, 10, 15]">
+    </mat-paginator>
+  </div>
+</div>

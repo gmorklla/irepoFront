@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { sections } from '../shared/config/data.model';
 import { EmitterService } from '../shared/services/emitter.service';
 import { ErrorSnackService } from '../shared/services/error-snack.service';
+import { CheckUserService } from '../shared/services/check-user.service';
 
 @Component({
   selector: 'app-side-menu',
@@ -14,11 +15,9 @@ export class SideMenuComponent implements OnInit {
   sections = sections;
   notifications = [];
   routes = [
-    { name: 'activities', active: false },
-    { name: 'admin', active: false },
+    { name: 'issues', active: false },
     { name: 'reports', active: false },
     { name: 'users', active: false },
-    { name: 'expenses', active: false },
   ];
   user;
   message;
@@ -27,10 +26,18 @@ export class SideMenuComponent implements OnInit {
   constructor(
     private router: Router,
     private errorSnack: ErrorSnackService,
+    private checkUser: CheckUserService
   ) { }
 
   ngOnInit() {
-    EmitterService.get('logIn').subscribe(res => res ? this.activateRoutes() : this.deactivateRoutes());
+    this.checkUser.userS.subscribe(user => {
+      if (user) {
+        this.user = user;
+        this.activateRoutes();
+      } else {
+        this.deactivateRoutes();
+      }
+    });
   }
 
   activateRoutes() {

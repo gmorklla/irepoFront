@@ -6,6 +6,12 @@ const appRoutes: Routes = [
     { path: 'login',
       loadChildren: './login/login.module#LoginModule',
     },
+    { path: 'users',
+      loadChildren: './users/users.module#UsersModule',
+    },
+    { path: 'issues',
+      loadChildren: './issues/issues.module#IssuesModule',
+    },
     // Redirect all others to login
     { path: '',
       redirectTo: '/login',

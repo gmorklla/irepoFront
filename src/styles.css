@@ -16,3 +16,51 @@ mat-drawer {
     background-color: rgba(255, 255, 255, 0.8) !important;
     min-width: 250px;
 }
+
+h3.title {
+    background-color: white;
+    padding: 15px;
+    border-radius: 10px;
+    display: flex;
+    border: solid 5px ghostwhite;
+    font-weight: inherit;
+    padding-left: 50px;
+    letter-spacing: 5px;
+    align-items: center;
+    color: #2296f3;
+}
+
+h3.title mat-icon {
+    margin-right: 10px;
+}
+
+mat-card {
+    background-color: rgba(255, 255, 255, 0.9) !important;
+    border-radius: 10px !important;
+}
+
+.red {
+    color: #E91E63;
+}
+
+.orange {
+    color: orange;
+}
+
+.yellow {
+    color: gold;
+}
+
+.green {
+    color: yellowgreen;
+}
+
+@media all and (max-width: 800px) {
+    mat-card {
+        border-radius: 0 !important;
+    }
+    h3.title {
+        padding-left: 35px;
+        border-radius: 0;
+    }
+}

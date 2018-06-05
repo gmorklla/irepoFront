@@ -1,0 +1,25 @@
+<h3 class="title">
+  <mat-icon>bug_report</mat-icon>
+  Issues
+  <span class="spacer"></span>
+  <button mat-icon-button color="warn" [matMenuTriggerFor]="menu">
+      <mat-icon aria-label="Add" class="addIcon">add</mat-icon>
+  </button>
+</h3>
+<div class="buttons">
+    <mat-menu #menu="matMenu" overlapTrigger="false">
+        <button mat-menu-item (click)="createIssue()">
+            <mat-icon>bug_report</mat-icon>
+            <span>Issue</span>
+        </button>
+    </mat-menu>
+</div>
+<!-- <a [routerLink]="['/issues/issue', 1]">Link</a> -->
+<div class="issuesContainer" *ngIf="issues; else noIssues" [@showing]="issues.length">
+  <app-issue *ngFor="let issue of issues"
+    [issue]="issue">
+  </app-issue>
+</div>
+<ng-template #noIssues>
+  <h3>There are no issues yet.</h3>
+</ng-template>
