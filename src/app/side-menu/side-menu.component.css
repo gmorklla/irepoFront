@@ -1,7 +1,7 @@
 .logo {
     width: 100%;
-    background-color: #2196f3;
-    margin: 10px 0;
+    background-color: #9c27b0;
+    margin: 0 0 10px;
     padding: 10px 0;
 }
 
@@ -24,7 +24,7 @@
 .active {
     cursor: pointer;
     background-color: transparent !important;
-    color: #448aff !important;
+    color: #7e1f8f !important;
     cursor: pointer;
 }
 

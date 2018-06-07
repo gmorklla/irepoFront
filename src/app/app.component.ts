@@ -29,9 +29,7 @@ export class AppComponent implements OnInit {
   ) { }
 
   ngOnInit () {
-    setTimeout(() => {
-      this.showBack = 'active';
-    }, 100);
+    setTimeout(() => this.showBack = 'active', 100);
   }
 
   closeDrawer () {

@@ -1,190 +1,28 @@
-mat-chip {
-    margin: 5px !important;
-}
-
-mat-form-field, mat-slider {
-    width: 100%;
-}
-
-mat-form-field mat-icon {
+.container {
+    display: flex;
+    background-color: white;
+    padding: 20px;
+    border-bottom: 1px solid lightgray;
     cursor: pointer;
 }
 
-mat-card {
-    box-shadow: none !important;
+.container mat-icon {
+    margin-right: 20px;
 }
 
-mat-card-header {
-    padding: 10px;
-    background-color: ghostwhite;
-    border-radius: 10px;
-}
-
-section {
-    margin: 10px 0;
-}
-
-.hoursContainer {
-    padding: 10px;
-    margin-top: 20px !important;
-    background-color: #fafafa;
-    border-radius: 10px;
-}
-
-.hoursDetail {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-}
-
-.hoursDetail mat-icon {
-    cursor: pointer;
-}
-
-.subtitle {
-    text-transform: uppercase;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-}
-
-mat-chip {
-    cursor: pointer !important;
-}
-
-.hoursList {
-    display: flex;
-    flex-flow: row;
-    flex-wrap: wrap;
-}
-
-.hoursList h3 {
-    flex: 1 0 100%;
-}
-
-.hourList mat-list-item {
-    flex: 1 1 50%;
-}
-
-.expand {
-    position: absolute;
-    top: 25px;
-    right: 25px;
+.title {
+    margin-bottom: 5px;
 }
 
 .description {
-    font-size: x-small !important;
-    color: black !important;
-    margin-top: 5px !important;
+    font-size: small;
+    color: #586069;
 }
 
-.date {
-    font-weight: bolder !important;
-    font-size: medium !important;
-}
-
-.hours {
-    color: teal !important;
-    font-size: smaller !important;
-    text-transform: uppercase !important;
-    font-weight: bolder !important;
-}
-
-.expense {
-    color: #673AB7 !important;
-}
-
-.allDetailsContainer {
-    display: flex;
-    width: 100%;
-    height: auto;
-    flex-direction: row;
-    flex-wrap: wrap;
-}
-
-.allDetailsContainer div {
-    height: auto;
-    padding: 5px;
-    margin: 2px 1px;
-    background-color: whitesmoke;
-    width: 100%;
-    flex: 1 0 auto;
-}
-
-.allDetailsContainer div p {
-    margin: 5px 0;
-    font-size: smaller;
-}
-
-.detailHours {
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
-    color: teal;
-}
-
-.detailHours mat-icon {
-    margin-right: 5px;
-}
-
-.detailTaskName {
-    font-weight: bolder;
-    text-transform: uppercase;
-}
-
-.detailTaskName span {
-    padding: 2px;
-    background-color: black;
-    color: white;
-    margin-right: 5px;
-}
-
-hr {
-    border-color: white;
-}
-
-h3 {
-    display: flex;
-    align-items: center;
-}
-
-mat-card-subtitle div {
-    display: flex;
-    align-items: center;
-    width: 100%;
-    min-height: 35px;
-}
-
-mat-card-subtitle div mat-icon {
-    margin-right: 10px;
-}
-
-mat-card-header > div {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.status {
-    width: 20px;
-    height: 20px;
-}
-
-.xtraHoursPerTask {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-}
-
-.xtraHoursPerTask button {
-    width: 100%;
+.spacer {
+    flex: 1 1 auto;
 }
 
 @media all and (max-width: 800px) {
-    mat-card {
-        padding: 0;
-    }
-    mat-card-header, .hoursContainer {
-        border-radius: 0;
-    }
+
 }

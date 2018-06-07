@@ -1,0 +1,32 @@
+mat-card-header {
+    padding: 10px;
+    background-color: ghostwhite;
+    border-radius: 10px;
+}
+
+mat-card-subtitle {
+    color: black;
+}
+
+mat-card-subtitle div {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    min-height: 35px;
+}
+
+mat-card-subtitle div mat-icon {
+    margin-right: 10px;
+}
+
+mat-card-header > div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+@media all and (max-width: 800px) {
+    mat-card-header {
+        border-radius: 0;
+    }
+}

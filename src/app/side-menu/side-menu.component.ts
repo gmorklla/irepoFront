@@ -1,5 +1,4 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import { Router } from '@angular/router';
 import { sections } from '../shared/config/data.model';
 import { EmitterService } from '../shared/services/emitter.service';
 import { ErrorSnackService } from '../shared/services/error-snack.service';
@@ -15,16 +14,15 @@ export class SideMenuComponent implements OnInit {
   sections = sections;
   notifications = [];
   routes = [
-    { name: 'issues', active: false },
-    { name: 'reports', active: false },
-    { name: 'users', active: false },
+    { name: 'issues', icon: 'bug_report', url: 'issues', active: false },
+    { name: 'reports', icon: 'equalizer', url: 'reports', active: false },
+    { name: 'users', icon: 'account_box', url: 'users', active: false },
   ];
   user;
   message;
   @Output() close = new EventEmitter<any>();
 
   constructor(
-    private router: Router,
     private errorSnack: ErrorSnackService,
     private checkUser: CheckUserService
   ) { }

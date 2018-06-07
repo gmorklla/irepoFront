@@ -2,17 +2,31 @@
     display: flex;
     width: 100%;
     flex-wrap: wrap;
-    flex-direction: row;
+    flex-direction: column;
     justify-content: space-between;
 }
 
 app-issue {
-    width: 49.5%;
-    margin: 0 0 15px;
+    width: 100%;
 }
 
 .spacer {
     flex: 1 1 auto;
+}
+
+.add {
+    position: absolute;
+    top: 115px;
+    right: 5%;
+}
+
+.addIcon {
+    margin-right: 0;
+}
+
+.searchMenu {
+    border-bottom: 1px solid lightgray;
+    justify-content: space-between;
 }
 
 /* Small screens */
@@ -22,7 +36,9 @@ app-issue {
         flex-direction: column;
     }
     app-issue {
-        width: 100%;
         margin: 0 0 30px;
+    }
+    .add {
+        top: 107px;
     }
 }

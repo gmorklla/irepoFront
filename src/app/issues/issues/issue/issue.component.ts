@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-issue',
@@ -9,9 +10,14 @@ export class IssueComponent implements OnInit {
 
   @Input() issue;
 
-  constructor() { }
+  constructor(
+    private router: Router
+  ) { }
 
-  ngOnInit() {
+  ngOnInit() {}
+
+  issueDetail () {
+    this.router.navigate(['/issues/issue', this.issue._id]);
   }
 
 }

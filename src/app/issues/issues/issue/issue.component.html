@@ -1,34 +1,15 @@
-<mat-card>
-  <mat-card-header>
-    <mat-card-subtitle>
-      <div matTooltip="Status" [matTooltipPosition]="'right'">
-        <mat-icon aria-label="Status" [ngClass]="issue.state.open.status ? 'green' : ''">{{issue.state.open.status ? 'lock_open' : 'lock'}}</mat-icon>
-        {{issue.state.open.status ? 'Open' : 'Close'}}
-      </div>
-      <div matTooltip="Title" [matTooltipPosition]="'right'">
-        <mat-icon aria-label="Title">title</mat-icon>
+<div class="container" (click)="issueDetail()">
+  <mat-icon aria-label="Status" [ngClass]="issue.state.open.status ? 'green' : ''">{{issue.state.open.status ? 'lock_open' : 'lock'}}</mat-icon>
+  <div>
+    <div class="title">
         {{issue.issue.title}}
-      </div>
-      <div matTooltip="Description" [matTooltipPosition]="'right'">
-        <mat-icon aria-label="Description">description</mat-icon>
-        {{issue.issue.description}}
-      </div>
-      <div matTooltip="Created" [matTooltipPosition]="'right'">
-        <mat-icon aria-label="Created">calendar_today</mat-icon>
-        {{issue.created | date: 'medium'}}
-      </div>
-      <div matTooltip="Updated" [matTooltipPosition]="'right'">
-        <mat-icon aria-label="Updated">update</mat-icon>
-        {{issue.updated | date: 'medium'}}
-      </div>
-      <div matTooltip="Priority" [matTooltipPosition]="'right'">
-        <mat-icon aria-label="Priority" *ngIf="issue.severity === 1" class="red">looks_one</mat-icon>
-        <mat-icon aria-label="Priority" *ngIf="issue.severity === 2" class="orange">looks_two</mat-icon>
-        <mat-icon aria-label="Priority" *ngIf="issue.severity === 3" class="yellow">looks_three</mat-icon>
-        <span *ngIf="issue.severity === 1">High priority</span>
-        <span *ngIf="issue.severity === 2">Medium priority</span>
-        <span *ngIf="issue.severity === 3">Low priority</span>
-      </div>
-    </mat-card-subtitle>
-  </mat-card-header>
-</mat-card>
+    </div>
+    <div class="description">
+        {{issue.issue.description}} by ...
+    </div>
+  </div>
+  <span class="spacer"></span>
+  <mat-chip-list>
+    <mat-chip color="accent" selected="true">3</mat-chip>
+  </mat-chip-list>
+</div>

@@ -11,7 +11,12 @@ export const sections = [
     },
     {
       name: 'Users',
-      icon: 'account_circle',
+      icon: 'account_box',
       url: 'users'
+    },
+    {
+      name: 'Login',
+      icon: '',
+      url: ''
     },
 ];

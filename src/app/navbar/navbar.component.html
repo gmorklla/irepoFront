@@ -1,6 +1,6 @@
 <!-- Navbar -->
-<mat-toolbar color="primary">
-    <mat-toolbar-row>
+<mat-toolbar color="primary" class="mainContainer">
+    <mat-toolbar-row class="mainToolbar">
         <button mat-icon-button class="menu" (click)="toggle()">
             <mat-icon aria-label="Menu">menu</mat-icon>
         </button>
@@ -10,10 +10,8 @@
             <mat-icon aria-label="Home">home</mat-icon>
         </button>
     </mat-toolbar-row>
-    <mat-toolbar-row class="permissions" *ngIf="showSubNav">
-        <span style="font-size: small;">Get notifications?</span>
-        <span class="spacer"></span>
-        <button mat-button color="accent" (click)="getPermission(true)">Accept</button>
-        <button mat-button color="warn" (click)="getPermission(false)">Later</button>
-    </mat-toolbar-row>
+</mat-toolbar>
+<mat-toolbar color="warn" class="submenu">
+    <span class="title">{{title}}</span>
+    <mat-icon>{{titleIcon}}</mat-icon>
 </mat-toolbar>

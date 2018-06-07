@@ -1,3 +1,13 @@
+.mainContainer {
+    z-index: 1;
+    top: 0;
+    position: sticky;
+}
+
+.mainToolbar {
+    box-shadow: 0 3px 5px -1px rgba(0,0,0,.2), 0 6px 10px 0 rgba(0,0,0,.14), 0 1px 18px 0 rgba(0,0,0,.12);
+}
+
 .spacer {
     flex: 1 1 auto;
 }
@@ -10,13 +20,19 @@
     margin: 0 14px !important;
 }
 
+.submenu {
+    padding: 0 85px;
+    height: 80px;
+    letter-spacing: 5px;
+}
+
+.submenu mat-icon {
+    margin: 0 14px;
+}
+
 mat-icon {
     outline: none;
     cursor: pointer;
-}
-
-.permissions {
-    background-color: black;
 }
 
 .spacer {
@@ -27,8 +43,15 @@ mat-icon {
     letter-spacing: 5px;
 }
 
+.title {
+    text-transform: capitalize;
+}
+
 @media all and (max-width: 800px) {
     .name {
         letter-spacing: 0;
+    }
+    .submenu {
+        margin-bottom: 50px;
     }
 }
