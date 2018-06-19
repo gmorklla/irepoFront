@@ -1,0 +1,51 @@
+<div class="title">
+  <mat-icon>settings_applications</mat-icon>
+  <p>Create an Issue</p>
+</div>
+<div class="content">
+  <form [formGroup]="addIssue" novalidate>
+    <!-- /////////////////////////////////// Title /////////////////////////////////// -->
+    <section class="fullW">
+      <mat-form-field [floatLabel]="'never'">
+        <input matInput placeholder="Title" formControlName="title" type="text">
+      </mat-form-field>
+    </section>
+    <!-- /////////////////////////////////// Description /////////////////////////////////// -->
+    <section class="fullW">
+      <mat-form-field [floatLabel]="'never'">
+        <textarea matInput placeholder="Description" formControlName="description"></textarea>
+      </mat-form-field>
+    </section>
+    <!-- /////////////////////////////////// Engineer /////////////////////////////////// -->
+    <section class="fullW">
+      <mat-form-field [floatLabel]="'never'">
+        <mat-select placeholder="Engineer" formControlName="engineer">
+            <mat-option *ngFor="let user of users" [value]="user.email">
+                {{ user.email }}
+            </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </section>
+    <!-- /////////////////////////////////// Customer /////////////////////////////////// -->
+    <section class="fullW">
+      <mat-form-field [floatLabel]="'never'">
+        <input matInput placeholder="Customer" formControlName="customer" type="text">
+      </mat-form-field>
+    </section>
+    <!-- /////////////////////////////////// Platform /////////////////////////////////// -->
+    <section class="fullW">
+      <mat-form-field [floatLabel]="'never'">
+        <input matInput placeholder="Platform" formControlName="platform" type="text">
+      </mat-form-field>
+    </section>
+    <!-- /////////////////////////////////// Severity /////////////////////////////////// -->
+    <section class="fullW">
+      <mat-radio-group formControlName="severity">
+          <mat-radio-button value="1">High</mat-radio-button>
+          <mat-radio-button value="2">Normal</mat-radio-button>
+          <mat-radio-button value="3">Low</mat-radio-button>
+      </mat-radio-group>
+    </section>
+    <button class="create" mat-raised-button color="warn" [disabled]="addIssue.status === 'INVALID'" (click)="createIssue()">Create</button>
+  </form>
+</div>

@@ -1,15 +1,18 @@
-<div class="container" (click)="issueDetail()">
+<div
+  class="container"
+  (click)="issueDetail()"
+  [@selected]="selected">
   <mat-icon aria-label="Status" [ngClass]="issue.state.open.status ? 'green' : ''">{{issue.state.open.status ? 'lock_open' : 'lock'}}</mat-icon>
   <div>
     <div class="title">
         {{issue.issue.title}}
     </div>
     <div class="description">
-        {{issue.issue.description}} by ...
+        {{issue.issue.description}} by {{issue.engineer.email}}
     </div>
   </div>
   <span class="spacer"></span>
   <mat-chip-list>
-    <mat-chip color="accent" selected="true">3</mat-chip>
+    <mat-chip color="primary" selected="true">3</mat-chip>
   </mat-chip-list>
 </div>

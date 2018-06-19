@@ -38,14 +38,6 @@ h3.title mat-icon {
     margin-right: 10px;
 }
 
-mat-card {
-    border-radius: 0 !important;
-    border: solid 3px #4a589e;
-    border-right-color: #9b28b0;
-    border-top-left-radius: 0;
-    border-bottom-color: #9b28b0;
-}
-
 .red {
     color: #E91E63;
 }

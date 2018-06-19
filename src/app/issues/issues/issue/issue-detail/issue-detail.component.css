@@ -4,6 +4,15 @@ mat-card-header {
     border-radius: 10px;
 }
 
+mat-card-title {
+    font-size: larger !important;
+    text-transform: capitalize;
+    margin: 15px 0 30px;
+    letter-spacing: 1.5px;
+    color: #ea1f62;
+    border-bottom: 1px dotted #ea1f62;
+}
+
 mat-card-subtitle {
     color: black;
 }
@@ -23,6 +32,10 @@ mat-card-header > div {
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+button {
+    margin-left: 15px !important;
 }
 
 @media all and (max-width: 800px) {

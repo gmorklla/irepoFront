@@ -1,0 +1,21 @@
+.title {
+    display: flex;
+    align-items: center;
+}
+
+.title mat-icon {
+    margin-right: 10px;
+}
+
+.content, .fullW, .fullW mat-form-field {
+    width: 100%;
+}
+
+mat-radio-button {
+    margin-right: 10px;
+}
+
+.create {
+    margin-top: 30px;
+    width: 100%;
+}

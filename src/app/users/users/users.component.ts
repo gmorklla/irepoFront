@@ -1,26 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { trigger, style, transition, animate, state } from '@angular/animations';
 import { Observable } from 'rxjs-compat';
 import { HttpRequestService } from '../../shared/services/http-request.service';
+import { animations } from '../../shared/config/animations';
 
 @Component({
   selector: 'app-users',
   templateUrl: './users.component.html',
   styleUrls: ['./users.component.css'],
-  animations: [
-    trigger('appear', [
-      state('inactive', style({
-        opacity: 0,
-        transform: 'translateY(30%)'
-      })),
-      state('active', style({
-        opacity: 1,
-        transform: 'translateY(0)'
-      })),
-      transition('inactive => active', animate('500ms ease-out')),
-      transition('active => inactive', animate('500ms ease-out'))
-    ])
-  ]
+  animations: [ animations.appear ]
 })
 export class UsersComponent implements OnInit {
 

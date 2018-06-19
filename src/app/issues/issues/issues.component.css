@@ -29,14 +29,21 @@ app-issue {
     justify-content: space-between;
 }
 
+.noIssues {
+    width: 100%;
+    background-color: whitesmoke;
+}
+
+.noIssues h3 {
+    padding: 20px;
+    margin: 0;
+}
+
 /* Small screens */
 
 @media all and (max-width: 800px) {
     .issuesContainer {
         flex-direction: column;
-    }
-    app-issue {
-        margin: 0 0 30px;
     }
     .add {
         top: 107px;

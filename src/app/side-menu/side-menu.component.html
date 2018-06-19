@@ -3,7 +3,12 @@
 </div>
 <mat-list>
   <h3 mat-subheader>Sections</h3>
-  <mat-list-item *ngFor="let section of routes; let i = index" class="sections" [routerLink]="routes[i].active ? '/' + section.url : null" [ngClass]="routes[i].active ? 'active' : null" (click)="linkClicked()">
+  <mat-list-item
+    *ngFor="let section of routes; let i = index"
+    class="sections"
+    [routerLink]="routes[i].active ? '/' + section.url : null"
+    [ngClass]="routes[i].active ? 'active' : null"
+    (click)="linkClicked()">
     <mat-icon mat-list-icon>{{section.icon}}</mat-icon>
     <h4 mat-line>{{section.name}}</h4>
   </mat-list-item>

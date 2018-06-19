@@ -1,14 +1,6 @@
-<button mat-fab [matMenuTriggerFor]="menu" class="add">
+<button mat-fab class="add" (click)="createIssue()">
     <mat-icon aria-label="Add" class="addIcon">add</mat-icon>
 </button>
-<div class="buttons">
-    <mat-menu #menu="matMenu" overlapTrigger="false">
-        <button mat-menu-item (click)="createIssue()">
-            <mat-icon>bug_report</mat-icon>
-            <span>Issue</span>
-        </button>
-    </mat-menu>
-</div>
 <mat-toolbar class="searchMenu">
     <div class="button-row">
         <button mat-button>Open</button>
@@ -22,11 +14,17 @@
     </div>
 </mat-toolbar>
 
-<div class="issuesContainer" *ngIf="issues; else noIssues" [@showing]="issues.length">
-  <app-issue *ngFor="let issue of issues"
-    [issue]="issue">
+<div class="issuesContainer" *ngIf="issues" [@showing]="issues.length">
+  <app-issue
+    *ngFor="let issue of issues"
+    [issue]="issue"
+    (mouseenter)="mouseEnter(issue)"
+    (mouseleave)="mouseLeave(issue)"
+    [selected]="issue.selected">
   </app-issue>
 </div>
-<ng-template #noIssues>
-  <h3>There are no issues yet.</h3>
-</ng-template>
+
+<div *ngIf="issues?.length === 0" class="noIssues">
+    <h3>There are no issues yet.</h3>
+</div>
+

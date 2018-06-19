@@ -1,37 +1,51 @@
-<mat-card>
+<mat-card [@appear]="appearIn">
     <mat-card-header>
+      <mat-card-title>
+          {{(issue$ | async)?.issue.title}}
+      </mat-card-title>
       <mat-card-subtitle>
-        <div matTooltip="Status" [matTooltipPosition]="'right'">
-          <mat-icon aria-label="Status" [ngClass]="issue?.state.open.status ? 'green' : ''">{{issue?.state.open.status ? 'lock_open' : 'lock'}}</mat-icon>
-          {{issue?.state.open.status ? 'Open' : 'Close'}}
-        </div>
-        <div matTooltip="Title" [matTooltipPosition]="'right'">
-          <mat-icon aria-label="Title">title</mat-icon>
-          {{issue?.issue.title}}
-        </div>
         <div matTooltip="Description" [matTooltipPosition]="'right'">
           <mat-icon aria-label="Description">description</mat-icon>
-          {{issue?.issue.description}}
+          {{(issue$ | async)?.issue.description}}
         </div>
         <div matTooltip="Created" [matTooltipPosition]="'right'">
           <mat-icon aria-label="Created">calendar_today</mat-icon>
-          {{issue?.created | date: 'medium'}}
+          {{(issue$ | async)?.created | date: 'medium'}}
         </div>
         <div matTooltip="Updated" [matTooltipPosition]="'right'">
           <mat-icon aria-label="Updated">update</mat-icon>
-          {{issue?.updated | date: 'medium'}}
+          {{(issue$ | async)?.updated | date: 'medium'}}
+        </div>
+        <div matTooltip="Status" [matTooltipPosition]="'right'">
+          <mat-icon aria-label="Status" [ngClass]="(issue$ | async)?.state.open.status ? 'green' : ''">{{(issue$ | async)?.state.open.status ? 'lock_open' : 'lock'}}</mat-icon>
+          {{(issue$ | async)?.state.open.status ? 'Open' : 'Close'}}
         </div>
         <div matTooltip="Priority" [matTooltipPosition]="'right'">
-          <mat-icon aria-label="Priority" *ngIf="issue?.severity === 1" class="red">looks_one</mat-icon>
-          <mat-icon aria-label="Priority" *ngIf="issue?.severity === 2" class="orange">looks_two</mat-icon>
-          <mat-icon aria-label="Priority" *ngIf="issue?.severity === 3" class="yellow">looks_three</mat-icon>
-          <span *ngIf="issue?.severity === 1">High priority</span>
-          <span *ngIf="issue?.severity === 2">Medium priority</span>
-          <span *ngIf="issue?.severity === 3">Low priority</span>
+          <mat-icon aria-label="Priority" *ngIf="(issue$ | async)?.severity === 1" class="red">looks_one</mat-icon>
+          <mat-icon aria-label="Priority" *ngIf="(issue$ | async)?.severity === 2" class="orange">looks_two</mat-icon>
+          <mat-icon aria-label="Priority" *ngIf="(issue$ | async)?.severity === 3" class="yellow">looks_3</mat-icon>
+          <span *ngIf="(issue$ | async)?.severity === 1">High priority</span>
+          <span *ngIf="(issue$ | async)?.severity === 2">Medium priority</span>
+          <span *ngIf="(issue$ | async)?.severity === 3">Low priority</span>
         </div>
       </mat-card-subtitle>
     </mat-card-header>
   <mat-card-content>
-    {{issue | json}}
+    <mat-list>
+      <h3 mat-subheader>Actions</h3>
+      <mat-list-item>
+        <mat-icon mat-list-icon>feedback</mat-icon>
+        <h4 mat-line>Name</h4>
+        <p mat-line>Jan 1, 2016</p>
+      </mat-list-item>
+      <mat-list-item>
+        <mat-icon mat-list-icon>feedback</mat-icon>
+        <h4 mat-line>Name</h4>
+        <p mat-line>Jan 1, 2016</p>
+      </mat-list-item>
+    </mat-list>
   </mat-card-content>
+  <mat-card-actions>
+    <button mat-raised-button color="warn">ADD ACTION</button>
+  </mat-card-actions>
 </mat-card>
