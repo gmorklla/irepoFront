@@ -8,6 +8,7 @@
 
 app-issue {
     width: 100%;
+    cursor: pointer;
 }
 
 .spacer {
@@ -24,11 +25,6 @@ app-issue {
     margin-right: 0;
 }
 
-.searchMenu {
-    border-bottom: 1px solid lightgray;
-    justify-content: space-between;
-}
-
 .noIssues {
     width: 100%;
     background-color: whitesmoke;
@@ -39,6 +35,27 @@ app-issue {
     margin: 0;
 }
 
+.filterContainer {
+    background-color: rgba(255, 255, 255, 1);
+    padding: 0 15px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+form {
+    flex: 1;
+    margin-right: 15px;
+}
+
+form mat-form-field {
+    width: 100%;
+}
+
+mat-button-toggle-group {
+    box-shadow: none;
+}
+
 /* Small screens */
 
 @media all and (max-width: 800px) {
@@ -47,5 +64,8 @@ app-issue {
     }
     .add {
         top: 107px;
+    }
+    .filterContainer {
+        flex-direction: column;
     }
 }

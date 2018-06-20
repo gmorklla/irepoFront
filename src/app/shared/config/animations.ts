@@ -87,4 +87,18 @@ export const animations = {
             animate('300ms ease-in')
         ]),
     ]),
+    appearDisplay: trigger('appearDisplay', [
+        state('inactive', style({
+          opacity: 0,
+          display: 'none',
+          transform: 'scale(1.2)'
+        })),
+        state('active', style({
+          opacity: 1,
+          display: 'flex',
+          transform: 'scale(1)'
+        })),
+        transition('inactive => active', animate('500ms ease-out')),
+        transition('active => inactive', animate('500ms ease-out'))
+    ]),
 };

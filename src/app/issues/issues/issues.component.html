@@ -1,25 +1,43 @@
 <button mat-fab class="add" (click)="createIssue()">
     <mat-icon aria-label="Add" class="addIcon">add</mat-icon>
 </button>
-<mat-toolbar class="searchMenu">
-    <div class="button-row">
-        <button mat-button>Open</button>
-        <button mat-button>Closed</button>
-    </div>
-    <div class="button-row">
-        <button mat-button>Author</button>
-        <button mat-button>Labels</button>
-        <button mat-button>Assignee</button>
-        <button mat-button><mat-icon>search</mat-icon></button>
-    </div>
-</mat-toolbar>
+<mat-progress-bar mode="indeterminate" *ngIf="load"></mat-progress-bar>
+<div class="filterContainer">
+    <form>
+        <mat-form-field [floatLabel]="'never'">
+            <input matInput type="text" placeholder="Search by {{term}}" [formControl]="searchField"/>
+        </mat-form-field>
+    </form>
+    <mat-button-toggle-group [(ngModel)]="term">
+        <mat-button-toggle value="engineer" [checked]="true">
+            Engineer
+        </mat-button-toggle>
+        <mat-button-toggle value="contributor">
+            Contributor
+        </mat-button-toggle>
+        <mat-button-toggle value="labels">
+            Labels
+        </mat-button-toggle>
+    </mat-button-toggle-group>
+    <mat-button-toggle-group [(ngModel)]="status">
+        <mat-button-toggle value="open" matTooltip="Open" [matTooltipPosition]="'left'">
+            <mat-icon aria-label="Open">lock_open</mat-icon>
+        </mat-button-toggle>
+        <mat-button-toggle value="close" matTooltip="Close" [matTooltipPosition]="'left'">
+            <mat-icon aria-label="Close">lock</mat-icon>
+        </mat-button-toggle>
+        <mat-button-toggle value="" matTooltip="Open and Close" [matTooltipPosition]="'left'">
+            <mat-icon>indeterminate_check_box</mat-icon>
+        </mat-button-toggle>
+    </mat-button-toggle-group>
+</div>
 
-<div class="issuesContainer" *ngIf="issues" [@showing]="issues.length">
+<div class="issuesContainer">
   <app-issue
-    *ngFor="let issue of issues"
+    *ngFor="let issue of (issues$ | async) | openOrClose:status"
     [issue]="issue"
-    (mouseenter)="mouseEnter(issue)"
-    (mouseleave)="mouseLeave(issue)"
+    (mouseenter)="issue.selected = 'selected'"
+    (mouseleave)="issue.selected = 'not'"
     [selected]="issue.selected">
   </app-issue>
 </div>

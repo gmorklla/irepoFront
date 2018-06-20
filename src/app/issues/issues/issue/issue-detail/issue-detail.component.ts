@@ -3,6 +3,8 @@ import { ActivatedRoute } from '@angular/router';
 import { BehaviorSubject } from 'rxjs-compat/BehaviorSubject';
 import { HttpRequestService } from '../../../../shared/services/http-request.service';
 import { animations } from '../../../../shared/config/animations';
+import { MatDialog } from '@angular/material';
+import { AddActionComponent } from './add-action/add-action.component';
 
 @Component({
   selector: 'app-issue-detail',
@@ -18,7 +20,8 @@ export class IssueDetailComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private http: HttpRequestService
+    private http: HttpRequestService,
+    private dialog: MatDialog,
   ) {
     this.route.params.subscribe( params => {
       this.id = params.id;
@@ -36,6 +39,20 @@ export class IssueDetailComponent implements OnInit {
         this.issue$.next(data);
         this.appearIn = 'active';
       });
+  }
+
+  addAction () {
+    const data = {
+      maxWidth: '80vh',
+      width: '80vh',
+      maxHeight: '100vh',
+      height: 'auto',
+      data: {}
+    };
+    const dialogRef = this.dialog.open(AddActionComponent, data);
+    dialogRef.afterClosed().subscribe(() => {
+      console.log('dialog closed');
+    });
   }
 
 }
