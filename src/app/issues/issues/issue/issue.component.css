@@ -4,6 +4,10 @@
     padding: 20px;
     border-bottom: 1px solid lightgray;
     cursor: pointer;
+    align-items: center;
+    border-left-width: 6px;
+    border-left-style: solid;
+    border-left-color: lightgray;
 }
 
 .container mat-icon {

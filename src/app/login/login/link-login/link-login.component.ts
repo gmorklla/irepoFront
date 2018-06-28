@@ -1,12 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroupDirective, NgForm, Validators, FormBuilder, FormGroup } from '@angular/forms';
-import * as firebase from 'firebase/app';
+import { FormGroup } from '@angular/forms';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs-compat';
 import { ErrorSnackService } from '../../../shared/services/error-snack.service';
-import { EmitterService } from '../../../shared/services/emitter.service';
 import { HttpRequestService } from '../../../shared/services/http-request.service';
+import { AuthService } from '../../../shared/services/auth.service';
 
 @Component({
   selector: 'app-link-login',
@@ -24,25 +23,13 @@ export class LinkLoginComponent implements OnInit {
     private router: Router,
     private errorSnack: ErrorSnackService,
     public afAuth: AngularFireAuth,
-    private http: HttpRequestService
+    private http: HttpRequestService,
+    private auth: AuthService
   ) {}
 
   ngOnInit() {
-    EmitterService.get('load').emit(true);
-
-    this.afAuth.authState
-      .flatMap(res => this.findUserInDb(res))
-      .catch(err => {
-        EmitterService.get('load').emit(false);
-        return Observable.throw(err);
-      })
-      .subscribe(user => {
-        EmitterService.get('load').emit(false);
-        this.user = user;
-      });
-
+    this.auth.user$.subscribe(user => this.user = user);
     const url = this.router.url;
-
     if (url.includes('signIn')) {
       this.confirmSignIn(url);
     }

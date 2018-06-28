@@ -1,3 +1,25 @@
-<p>
-  add-action works!
-</p>
+<div class="title">
+  <mat-icon>add_comment</mat-icon>
+  <p>Add an Action</p>
+</div>
+<div class="content">
+  <form [formGroup]="addAction" novalidate>
+    <!-- /////////////////////////////////// Title /////////////////////////////////// -->
+    <section class="fullW">
+      <mat-form-field [floatLabel]="'never'">
+        <input matInput placeholder="Title" formControlName="title" type="text">
+      </mat-form-field>
+    </section>
+    <!-- /////////////////////////////////// Description /////////////////////////////////// -->
+    <section class="fullW">
+      <mat-form-field [floatLabel]="'never'">
+        <textarea matInput placeholder="Description" formControlName="description"></textarea>
+      </mat-form-field>
+    </section>
+    <!-- /////////////////////////////////// User /////////////////////////////////// -->
+    <section class="fullW">
+      <p class="by">by {{(auth.user$ | async)?.email}}</p>
+    </section>
+    <button class="create" mat-raised-button color="warn" [disabled]="addAction.status === 'INVALID'" (click)="createAction()">Create</button>
+  </form>
+</div>

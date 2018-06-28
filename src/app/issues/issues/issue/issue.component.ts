@@ -23,4 +23,8 @@ export class IssueComponent implements OnInit {
     this.router.navigate(['/issues/issue', this.issue._id]);
   }
 
+  getSeverityCl (severity) {
+    return severity === 1 ? 'crimson' : severity === 2 ? 'orange' : 'yellow';
+  }
+
 }

@@ -33,15 +33,10 @@
   <mat-card-content>
     <mat-list>
       <h3 mat-subheader>Actions</h3>
-      <mat-list-item>
+      <mat-list-item *ngFor="let action of (issue$ | async)?.issue.actions">
         <mat-icon mat-list-icon>feedback</mat-icon>
-        <h4 mat-line>Name</h4>
-        <p mat-line>Jan 1, 2016</p>
-      </mat-list-item>
-      <mat-list-item>
-        <mat-icon mat-list-icon>feedback</mat-icon>
-        <h4 mat-line>Name</h4>
-        <p mat-line>Jan 1, 2016</p>
+        <h4 mat-line>{{action.action}}</h4>
+        <p mat-line>{{action.description}}</p>
       </mat-list-item>
     </mat-list>
   </mat-card-content>

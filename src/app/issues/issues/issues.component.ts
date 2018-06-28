@@ -77,9 +77,7 @@ export class IssuesComponent implements OnInit {
       data: {}
     };
     const dialogRef = this.dialog.open(CreateIssueComponent, data);
-    dialogRef.afterClosed().subscribe(() => {
-      console.log('dialog closed');
-    });
+    dialogRef.afterClosed().subscribe(() => this.getAllIssues());
   }
   // Function to get issues filtered by...
   getIssuesBy (word) {

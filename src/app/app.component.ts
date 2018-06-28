@@ -1,4 +1,5 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { WHeightService } from './shared/services/w-height.service';
 import { animations } from './shared/config/animations';
 
 @Component({
@@ -10,12 +11,18 @@ import { animations } from './shared/config/animations';
 export class AppComponent implements OnInit {
   class = '';
   @ViewChild('drawer') sidenav;
+  @ViewChild('container') container: ElementRef;
   showBack = 'inactive';
 
-  constructor() { }
+  constructor(
+    private wHeight: WHeightService
+  ) { }
 
   ngOnInit () {
-    setTimeout(() => this.showBack = 'active', 100);
+    setTimeout(() => {
+      this.wHeight.setHeight(this.container.nativeElement.offsetHeight);
+      this.showBack = 'active';
+    }, 100);
   }
 
   closeDrawer () {

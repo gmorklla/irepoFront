@@ -1,4 +1,4 @@
-<div class="loginContainer" [@appear]="appearIn">
+<div class="loginContainer" [@appear]="appearIn" [ngStyle]="{ 'height': height + 'px' }">
   <mat-card class="logoutCard">
       <app-link-login></app-link-login>
       <mat-card-actions>

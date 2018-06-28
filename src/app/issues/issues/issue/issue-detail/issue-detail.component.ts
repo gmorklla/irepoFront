@@ -47,12 +47,10 @@ export class IssueDetailComponent implements OnInit {
       width: '80vh',
       maxHeight: '100vh',
       height: 'auto',
-      data: {}
+      data: { issue: this.issue$ }
     };
     const dialogRef = this.dialog.open(AddActionComponent, data);
-    dialogRef.afterClosed().subscribe(() => {
-      console.log('dialog closed');
-    });
+    dialogRef.afterClosed().subscribe(issue => issue ? this.issue$.next(issue) : null);
   }
 
 }

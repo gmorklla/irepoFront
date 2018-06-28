@@ -57,7 +57,7 @@ mat-paginator {
 
 .mat-column-email, .mat-column-created, .mat-column-delete {
     flex: 1 0 150px;
-    border-right: 1px solid #BDBDBD;
+    border-right: 1px solid #eaeaea;
     padding: 0 10px;
     color: rgba(0, 0, 0, 0.54);
 }

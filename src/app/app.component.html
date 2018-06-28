@@ -4,7 +4,7 @@
       <app-side-menu (close)="drawer.close()"></app-side-menu>
   </mat-drawer>
 
-  <div style="width: 100%; height: 100%;">
+  <div class="mainContainer" #container>
       <!-- Navbar component -->
       <app-navbar (sideNavToggle)="drawer.toggle()"></app-navbar>
       <div class="routerContainer">

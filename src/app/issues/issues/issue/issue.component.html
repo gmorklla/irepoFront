@@ -1,7 +1,8 @@
 <div
   class="container"
   (click)="issueDetail()"
-  [@selected]="selected">
+  [@selected]="selected"
+  [ngStyle]="{ 'border-left-color': getSeverityCl(issue.severity) }">
   <mat-icon aria-label="Status" [ngClass]="issue.state.open.status ? 'green' : ''">{{issue.state.open.status ? 'lock_open' : 'lock'}}</mat-icon>
   <div>
     <div class="title">
@@ -13,6 +14,6 @@
   </div>
   <span class="spacer"></span>
   <mat-chip-list>
-    <mat-chip color="primary" selected="true">3</mat-chip>
+    <mat-chip color="primary" selected="true" matTooltip="Actions" [matTooltipPosition]="'left'">{{issue.issue.actions.length}}</mat-chip>
   </mat-chip-list>
 </div>

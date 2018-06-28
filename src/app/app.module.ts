@@ -11,6 +11,8 @@ import { EmitterService } from './shared/services/emitter.service';
 import { ErrorSnackService } from './shared/services/error-snack.service';
 import { HttpRequestService } from './shared/services/http-request.service';
 import { CheckUserService } from './shared/services/check-user.service';
+import { WHeightService } from './shared/services/w-height.service';
+import { AuthService } from './shared/services/auth.service';
 import { AppRoutes } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { CustomMaterialModule } from './custom-material/custom-material.module';
@@ -39,7 +41,9 @@ import { LoadingComponent } from './loading/loading.component';
     EmitterService,
     ErrorSnackService,
     HttpRequestService,
-    CheckUserService
+    CheckUserService,
+    AuthService,
+    WHeightService
   ],
   bootstrap: [AppComponent]
 })
