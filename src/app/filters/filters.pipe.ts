@@ -14,3 +14,19 @@ export class OpenOrClosePipe implements PipeTransform {
   }
 
 }
+
+@Pipe({
+  name: 'orderBy'
+})
+export class OrderBy implements PipeTransform {
+
+  transform(value: Array<any>, prop: string): any {
+    if (value) {
+      prop === 'severity' ? value.sort((a, b) => a[prop] > b[prop] ? 1 : -1) : value.sort((a, b) => a[prop] > b[prop] ? -1 : 1);
+      return value;
+    } else {
+      return value;
+    }
+  }
+
+}

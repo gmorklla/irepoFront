@@ -1,6 +1,5 @@
 .container {
     display: flex;
-    background-color: rgba(255, 255, 255, 0.9);
     padding: 20px;
     border-bottom: 1px solid lightgray;
     cursor: pointer;
@@ -23,10 +22,42 @@
     color: #586069;
 }
 
+.description p {
+    text-align: justify;
+    margin-right: 20px;
+}
+
+.description span.date, .description span.creator, .description span.tag {
+    color: white;
+    background: #9C27B0;
+    padding: 5px;
+    font-weight: 100;
+}
+
+.description span.creator {
+    background: #6c59a8;
+}
+
+.someInfo {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    border-bottom: 1px solid white;
+}
+
+.someInfo span {
+    flex: 1 1 auto;
+    text-align: center;
+}
+
 .spacer {
     flex: 1 1 auto;
 }
 
 @media all and (max-width: 800px) {
-
+    .someInfo span {
+        width: 46%;
+        padding: 10px 2% !important;
+        font-size: small !important;
+    }
 }

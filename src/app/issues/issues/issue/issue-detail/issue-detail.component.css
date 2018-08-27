@@ -26,6 +26,7 @@ mat-card-subtitle div {
 
 mat-card-subtitle div mat-icon {
     margin-right: 10px;
+    color: #483c8b;
 }
 
 mat-card-header > div {
@@ -36,6 +37,76 @@ mat-card-header > div {
 
 button {
     margin-left: 15px !important;
+}
+
+.closeIssueBtn {
+    background-color: #e91e63;
+    color: white;
+    margin-left: 5px !important;
+}
+
+.reopenIssueBtn {
+    background-color: slateblue;
+    color: white;
+}
+
+h3 {
+    margin: 20px 0 10px !important;
+}
+
+.actions {
+    display: flex;
+    flex-direction: column;
+}
+
+.actions div {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    border-bottom: 1px dotted lightgray;
+}
+
+.actions div mat-icon {
+    margin-right: 10px;
+    color: #e81e63;
+}
+
+.actions div h4 {
+    color: #483c8b;
+    font-weight: 200;
+    text-transform: uppercase;
+}
+
+.actions .description {
+    font-size: small;
+    color: #586069;
+    border-bottom: none;
+}
+
+.description p {
+    text-align: justify;
+    margin-right: 20px;
+}
+
+.description span.date, .description span.creator {
+    color: white;
+    background: slategray;
+    padding: 2px 10px;
+    font-weight: 100;
+    font-size: smaller;
+}
+
+.description span.creator {
+    background: #6c59a8;
+}
+
+.tag {
+    color: white;
+    background-color: #e81e63;
+    margin: 0 2px;
+    padding: 2px 5px;
+    border-radius: 5px;
+    text-transform: uppercase;
 }
 
 @media all and (max-width: 800px) {

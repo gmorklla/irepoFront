@@ -11,6 +11,27 @@
     width: 100%;
 }
 
+.fullW div {
+    display: flex;
+    align-items: center;
+}
+
+.fullW div button {
+    flex: 0 0 auto;
+    margin-left: 5px;
+}
+
+.fullW div mat-form-field {
+    flex: 1 0 auto;
+    width: auto;
+    margin: 20px 0 10px;
+}
+
+.fullW mat-chip-list mat-chip mat-icon {
+    margin-left: 5px;
+    cursor: pointer;
+}
+
 mat-radio-button {
     margin-right: 10px;
 }

@@ -1,17 +1,20 @@
 <!-- Navbar -->
 <mat-toolbar color="primary" class="mainContainer">
     <mat-toolbar-row class="mainToolbar">
-        <button mat-icon-button class="menu" (click)="toggle()">
-            <mat-icon aria-label="Menu">menu</mat-icon>
-        </button>
-        <span matTooltip="Intelma Repository" [matTooltipPosition]="'below'" class="name">IRepo</span>
+        <span matTooltip="Intelma Repository" [matTooltipPosition]="'right'" class="name">IRepo</span>
         <span class="spacer"></span>
-        <button mat-icon-button [routerLink]="'/'">
+        <button mat-button [routerLink]="'/issues'">
+            <mat-icon aria-label="Issues">bug_report</mat-icon>
+        </button>
+        <button mat-button [routerLink]="'/users'">
+            <mat-icon aria-label="Users">account_box</mat-icon>
+        </button>
+        <button mat-button [routerLink]="'/'">
             <mat-icon aria-label="Home">home</mat-icon>
         </button>
     </mat-toolbar-row>
 </mat-toolbar>
-<mat-toolbar color="warn" class="submenu">
-    <span class="title">{{title}}</span>
+<mat-toolbar class="submenu">
     <mat-icon>{{titleIcon}}</mat-icon>
+    <span class="title">{{title}}</span>
 </mat-toolbar>

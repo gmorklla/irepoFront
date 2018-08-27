@@ -1,16 +1,18 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { OpenOrClosePipe } from './filters.pipe';
+import { OpenOrClosePipe, OrderBy } from './filters.pipe';
 
 @NgModule({
   imports: [
     CommonModule
   ],
   declarations: [
-    OpenOrClosePipe
+    OpenOrClosePipe,
+    OrderBy
   ],
   exports: [
-    OpenOrClosePipe
+    OpenOrClosePipe,
+    OrderBy
   ]
 })
 export class FiltersModule { }

@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { Router } from '@angular/router';
-import { Observable } from 'rxjs-compat';
+import { Observable } from 'rxjs/Observable';
+import { map, distinctUntilChanged, debounceTime } from 'rxjs/operators';
 import { ErrorSnackService } from '../../../shared/services/error-snack.service';
 import { HttpRequestService } from '../../../shared/services/http-request.service';
 import { AuthService } from '../../../shared/services/auth.service';
@@ -14,12 +15,13 @@ import { AuthService } from '../../../shared/services/auth.service';
 })
 export class LinkLoginComponent implements OnInit {
 
-  usersForm: FormGroup;
+  loginForm: FormGroup;
   user;
   users;
   email: string;
 
   constructor(
+    private fb: FormBuilder,
     private router: Router,
     private errorSnack: ErrorSnackService,
     public afAuth: AngularFireAuth,
@@ -28,6 +30,10 @@ export class LinkLoginComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    const opts = {
+      email: [ '', [Validators.required, Validators.email, ValidateDomain] ]
+    };
+    this.loginForm = this.fb.group(opts);
     this.auth.user$.subscribe(user => this.user = user);
     const url = this.router.url;
     if (url.includes('signIn')) {
@@ -53,9 +59,6 @@ export class LinkLoginComponent implements OnInit {
   }
 
   async sendEmailLink () {
-    if (this.checkDomain()) {
-      return;
-    }
     const actionCodeSettings = {
       // Your redirect URL
       url: 'http://localhost:4200/login',
@@ -64,10 +67,10 @@ export class LinkLoginComponent implements OnInit {
 
     try {
       await this.afAuth.auth.sendSignInLinkToEmail(
-        this.email,
+        this.loginForm.get('email').value,
         actionCodeSettings
       );
-      window.localStorage.setItem('emailForSignIn', this.email);
+      window.localStorage.setItem('emailForSignIn', this.loginForm.get('email').value);
       this.errorSnack.openSnackBar('Please check your email. We sent you an email with your login link', 'Ok');
     } catch (err) {
       this.errorSnack.openSnackBar(err.message, 'Ok');
@@ -101,28 +104,20 @@ export class LinkLoginComponent implements OnInit {
       this.errorSnack.openSnackBar('Welcome!', 'OK');
       window.localStorage.removeItem('emailForSignIn');
     });
-    // setTimeout(() => {
-    //   this.router.navigate(['activities']);
-    // }, 500);
+    setTimeout(() => {
+      this.router.navigate(['issues']);
+    }, 500);
   }
 
   logout() {
     this.afAuth.auth.signOut();
   }
 
-  checkDomain () {
-    const email = this.email;
-    if (email.indexOf('@') !== -1) {
-      const [_, domain] = email.split('@');
-      if (String(domain) === 'gmail.com' || String(domain) === 'intelmas.com' || String(domain) === 'hotmail.com') {
-        return null;
-      } else {
-        this.errorSnack.openSnackBar('Domain not allowed', 'Ok');
-        return {
-          status: 'Domain not allowed'
-        };
-      }
-    }
-  }
+}
 
+import { AbstractControl } from '@angular/forms';
+
+export function ValidateDomain(control: AbstractControl) {
+  const validation = /(gmail.com|hotmail.com|intelmas.com)$/.test(control.value);
+  return validation ? null : { validDomain: true };
 }

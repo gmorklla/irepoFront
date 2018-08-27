@@ -1,17 +1,19 @@
 .logo {
     width: 100%;
-    background-color: #9c27b0;
+    background-color: darkslateblue;
     margin: 0 0 10px;
     padding: 10px 0;
 }
 
 .logo p {
-    padding-left: 15px;
-    margin: 0;
+    width: 250px;
+    margin: 15px;
+    text-align: center;
 }
 
 .logo img {
-    width: 150px;
+    height: auto;
+    width: 100%;
 }
 
 .sections {
@@ -24,12 +26,16 @@
 .active {
     cursor: pointer;
     background-color: transparent !important;
-    color: #7e1f8f !important;
+    color: darkslateblue !important;
     cursor: pointer;
 }
 
 .active:hover {
     background-color: rgb(235, 247, 255) !important;
+}
+
+.active mat-icon {
+    color: rgb(52, 44, 102) !important;
 }
 
 .hoursList {

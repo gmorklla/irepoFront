@@ -1,5 +1,5 @@
 <mat-card [@appear]="appearIn">
   <mat-card-content>
-    <app-users-table *ngIf="users" [objForTable]="users"></app-users-table>
+    <app-users-table *ngIf="users" [objForTable]="users" (switchRole)="switchRole($event)"></app-users-table>
   </mat-card-content>
 </mat-card>

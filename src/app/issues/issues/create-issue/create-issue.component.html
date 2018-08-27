@@ -46,6 +46,26 @@
           <mat-radio-button value="3">Low</mat-radio-button>
       </mat-radio-group>
     </section>
+    <!-- /////////////////////////////////// Tags /////////////////////////////////// -->
+    <section class="fullW">
+      <div>
+        <mat-form-field class="example-full-width">
+          <input type="text" placeholder="Pick one tag or write your own" aria-label="Number" matInput [formControl]="myControl" [matAutocomplete]="auto" #tagTxt>
+          <mat-autocomplete #auto="matAutocomplete">
+            <mat-option *ngFor="let option of filteredTags | async" [value]="option">
+              {{option}}
+            </mat-option>
+          </mat-autocomplete>
+        </mat-form-field>
+        <button mat-raised-button color="primary" (click)="addTag(tagTxt)">ADD TAG</button>
+      </div>
+    </section>
+    <!-- /////////////////////////////////// Tags /////////////////////////////////// -->
+    <section class="fullW">
+        <mat-chip-list>
+          <mat-chip color="primary" selected *ngFor="let tag of tags">{{tag}}<mat-icon (click)="removeTag(tag)">close</mat-icon></mat-chip>
+        </mat-chip-list>
+    </section>
     <button class="create" mat-raised-button color="warn" [disabled]="addIssue.status === 'INVALID'" (click)="createIssue()">Create</button>
   </form>
 </div>

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from 'angularfire2/auth';
-import { Observable, BehaviorSubject } from 'rxjs-compat';
+import { Observable, ReplaySubject } from 'rxjs-compat';
 import { HttpRequestService } from './http-request.service';
 
 @Injectable({
@@ -8,7 +8,7 @@ import { HttpRequestService } from './http-request.service';
 })
 export class AuthService {
 
-  user$: BehaviorSubject<any> = new BehaviorSubject(null);
+  user$: ReplaySubject<any> = new ReplaySubject();
 
   constructor(
     public afAuth: AngularFireAuth,
@@ -19,9 +19,7 @@ export class AuthService {
     .catch(err => {
       return Observable.throw(err);
     })
-    .subscribe(user => {
-      this.user$.next(user);
-    });
+    .subscribe(user => this.user$.next(user));
   }
 
   findUserInDb (data): Observable<any> {

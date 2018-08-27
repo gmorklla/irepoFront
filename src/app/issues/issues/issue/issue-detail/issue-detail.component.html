@@ -17,30 +17,44 @@
           {{(issue$ | async)?.updated | date: 'medium'}}
         </div>
         <div matTooltip="Status" [matTooltipPosition]="'right'">
-          <mat-icon aria-label="Status" [ngClass]="(issue$ | async)?.state.open.status ? 'green' : ''">{{(issue$ | async)?.state.open.status ? 'lock_open' : 'lock'}}</mat-icon>
+          <mat-icon aria-label="Status" [ngStyle]="{ 'color': (issue$ | async)?.state.open.status ? '#e81e63' : '#483c8b'}">{{(issue$ | async)?.state.open.status ? 'lock_open' : 'lock'}}</mat-icon>
           {{(issue$ | async)?.state.open.status ? 'Open' : 'Close'}}
         </div>
         <div matTooltip="Priority" [matTooltipPosition]="'right'">
-          <mat-icon aria-label="Priority" *ngIf="(issue$ | async)?.severity === 1" class="red">looks_one</mat-icon>
-          <mat-icon aria-label="Priority" *ngIf="(issue$ | async)?.severity === 2" class="orange">looks_two</mat-icon>
-          <mat-icon aria-label="Priority" *ngIf="(issue$ | async)?.severity === 3" class="yellow">looks_3</mat-icon>
+          <mat-icon aria-label="Priority" *ngIf="(issue$ | async)?.severity === 1" style="color: crimson;">looks_one</mat-icon>
+          <mat-icon aria-label="Priority" *ngIf="(issue$ | async)?.severity === 2" style="color: orange;">looks_two</mat-icon>
+          <mat-icon aria-label="Priority" *ngIf="(issue$ | async)?.severity === 3" style="color: yellowgreen;">looks_3</mat-icon>
           <span *ngIf="(issue$ | async)?.severity === 1">High priority</span>
           <span *ngIf="(issue$ | async)?.severity === 2">Medium priority</span>
           <span *ngIf="(issue$ | async)?.severity === 3">Low priority</span>
         </div>
+        <div matTooltip="Labels" [matTooltipPosition]="'right'">
+          <mat-icon aria-label="Labels">label</mat-icon>
+          <span class="tag" *ngFor="let tag of (issue$ | async)?.tags; let i = index">{{tag}}</span>
+        </div>
       </mat-card-subtitle>
     </mat-card-header>
   <mat-card-content>
-    <mat-list>
-      <h3 mat-subheader>Actions</h3>
-      <mat-list-item *ngFor="let action of (issue$ | async)?.issue.actions">
+    <h3>Actions</h3>
+    <div class="actions" *ngFor="let action of (issue$ | async)?.issue.actions">
+      <div>
         <mat-icon mat-list-icon>feedback</mat-icon>
         <h4 mat-line>{{action.action}}</h4>
-        <p mat-line>{{action.description}}</p>
-      </mat-list-item>
-    </mat-list>
+      </div>
+      <p>{{action.description}}</p>
+      <div class="description">
+        <span class="creator">{{action.user}}</span>
+        <span class="date">{{action.created | date: 'medium'}}</span>
+      </div>
+    </div>
   </mat-card-content>
   <mat-card-actions>
-    <button mat-raised-button color="warn" (click)="addAction()">ADD ACTION</button>
+    <ng-container *ngIf="(issue$ | async)?.state.open.status; else closeIssue">
+      <button mat-raised-button color="warn" (click)="addAction()">ADD ACTION</button>
+      <button class="closeIssueBtn" mat-raised-button (click)="close()">CLOSE</button>
+    </ng-container>
+    <ng-template #closeIssue>
+      <button class="reopenIssueBtn" mat-raised-button (click)="reopen()">RE-OPEN</button>
+    </ng-template>
   </mat-card-actions>
 </mat-card>

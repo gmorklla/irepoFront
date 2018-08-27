@@ -6,6 +6,22 @@
     justify-content: space-between;
 }
 
+.issuesContainer h3 {
+    padding: 20px 0;
+    width: 100%;
+    margin: 0;
+    background-color: whitesmoke;
+    text-transform: uppercase;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: darkslateblue;
+}
+
+.issuesContainer h3 mat-icon {
+    margin-right: 5px;
+}
+
 app-issue {
     width: 100%;
     cursor: pointer;
@@ -25,16 +41,6 @@ app-issue {
     margin-right: 0;
 }
 
-.noIssues {
-    width: 100%;
-    background-color: whitesmoke;
-}
-
-.noIssues h3 {
-    padding: 20px;
-    margin: 0;
-}
-
 .filterContainer {
     background-color: rgba(255, 255, 255, 1);
     padding: 5px 15px;
@@ -44,17 +50,27 @@ app-issue {
     font-size: small;
 }
 
-form {
-    flex: 1;
-    margin-right: 15px;
+.filterContainer div.search, .filterContainer div.filters {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    width: 100%;
 }
 
-form mat-form-field {
+.filterContainer div.search form {
+    flex: 1;
+    margin-right: 5px;
+}
+
+.filterContainer div.search form mat-form-field {
     width: 100%;
 }
 
 mat-button-toggle-group {
     box-shadow: none;
+    margin: 0 5px;
+    background-color: ghostwhite;
+    border: 1px solid #e0e0e0;
 }
 
 /* Small screens */
@@ -68,5 +84,9 @@ mat-button-toggle-group {
     }
     .filterContainer {
         flex-direction: column;
+        padding: 5px;
+    }
+    .filterContainer div.filters {
+        margin-top: 10px;
     }
 }

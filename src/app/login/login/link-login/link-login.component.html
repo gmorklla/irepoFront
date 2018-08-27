@@ -10,11 +10,12 @@
   </ng-container>
 
   <ng-template #login>
-    <mat-form-field [floatLabel]="'never'">
-      <input placeholder="User email" matInput type="email" email [(ngModel)]="email">
-    </mat-form-field>
+    <form [formGroup]="loginForm" novalidate>
+      <mat-form-field [floatLabel]="'never'">
+        <input placeholder="User email" matInput type="email" formControlName="email">
+      </mat-form-field>
 
-    <button mat-raised-button color="primary" [disabled]="emailSent" (click)="sendEmailLink(email)">Get login link</button>
-
+      <button mat-raised-button color="primary" [disabled]="loginForm.status === 'INVALID'" (click)="sendEmailLink()">Get login link</button>
+    </form>
   </ng-template>
 

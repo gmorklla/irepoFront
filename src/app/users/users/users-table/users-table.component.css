@@ -55,7 +55,7 @@ mat-paginator {
     text-align: center;
 }
 
-.mat-column-email, .mat-column-created, .mat-column-delete {
+.mat-column-email, .mat-column-created, .mat-column-delete, .mat-column-change, .mat-column-admin {
     flex: 1 0 150px;
     border-right: 1px solid #eaeaea;
     padding: 0 10px;
@@ -68,15 +68,21 @@ mat-paginator {
     padding: 0 10px;
 }
 
-.mat-column-change, .mat-column-delete {
+.mat-column-change, .mat-column-admin, .mat-column-delete {
     flex: 1 0 30px;
-    border-right: 1px solid gray;
     padding: 0 10px;
     display: flex;
     justify-content: center;
 }
 
 .mat-column-delete { border-right: none; }
+
+.circle {
+    width: 10px;
+    height: 10px;
+    border: 1px solid white;
+    border-radius: 50%;
+}
 
 /* Small screens */
 

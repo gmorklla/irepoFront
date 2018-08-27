@@ -24,7 +24,7 @@ export class IssueComponent implements OnInit {
   }
 
   getSeverityCl (severity) {
-    return severity === 1 ? 'crimson' : severity === 2 ? 'orange' : 'yellow';
+    return severity === 1 ? 'crimson' : severity === 2 ? 'orange' : 'yellowgreen';
   }
 
 }

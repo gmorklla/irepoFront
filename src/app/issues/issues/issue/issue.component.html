@@ -3,17 +3,26 @@
   (click)="issueDetail()"
   [@selected]="selected"
   [ngStyle]="{ 'border-left-color': getSeverityCl(issue.severity) }">
-  <mat-icon aria-label="Status" [ngClass]="issue.state.open.status ? 'green' : ''">{{issue.state.open.status ? 'lock_open' : 'lock'}}</mat-icon>
+  <mat-icon aria-label="Status" [ngStyle]="{ 'color': issue.state.open.status ? '#e81e63' : '#483c8b' }">{{issue.state.open.status ? 'lock_open' : 'lock'}}</mat-icon>
   <div>
     <div class="title">
         {{issue.issue.title}}
     </div>
     <div class="description">
-        {{issue.issue.description}} by {{issue.engineer.email}}
+        <p>{{issue.issue.description}}</p>
     </div>
   </div>
   <span class="spacer"></span>
   <mat-chip-list>
     <mat-chip color="primary" selected="true" matTooltip="Actions" [matTooltipPosition]="'left'">{{issue.issue.actions.length}}</mat-chip>
   </mat-chip-list>
+</div>
+<div class="description someInfo">
+  <span class="creator">{{issue.engineer.email}}</span>
+  <span class="date">{{issue.created | date: 'medium'}}</span>
+  <span class="tag"
+    *ngFor="let tag of issue.tags; let i = index"
+    [ngStyle]="{ 'background': i % 2 === 0 ? '#483c8b' : '#372e6b'}">
+      {{tag}}
+  </span>
 </div>

@@ -15,7 +15,6 @@ export class SideMenuComponent implements OnInit {
   notifications = [];
   routes = [
     { name: 'issues', icon: 'bug_report', url: 'issues', active: false },
-    { name: 'reports', icon: 'equalizer', url: 'reports', active: false },
     { name: 'users', icon: 'account_box', url: 'users', active: false },
   ];
   user;

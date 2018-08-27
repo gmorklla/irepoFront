@@ -1,18 +1,11 @@
-<mat-drawer-container autosize [ngClass]="class">
-  <!-- Sidenav content -->
-  <mat-drawer #drawer mode="over" opened="false" class="drawer">
-      <app-side-menu (close)="drawer.close()"></app-side-menu>
-  </mat-drawer>
-
-  <div class="mainContainer" #container>
-      <!-- Navbar component -->
-      <app-navbar (sideNavToggle)="drawer.toggle()"></app-navbar>
-      <div class="routerContainer">
-          <!-- Router component -->
-          <router-outlet></router-outlet>
-          <img [@back]="showBack" src="../assets/images/login-background-02.jpg" class="bg" alt="">
-          <div *ngIf="true" class="gradient"></div>
-      </div>
-  </div>
-  <app-loading></app-loading>
-</mat-drawer-container>
+<div class="mainContainer" #container>
+    <!-- Navbar component -->
+    <app-navbar (sideNavToggle)="drawer.toggle()"></app-navbar>
+    <div class="routerContainer">
+        <!-- Router component -->
+        <router-outlet></router-outlet>
+        <img [@back]="showBack" src="../assets/images/login-background-02.jpg" class="bg" alt="">
+        <div *ngIf="true" class="gradient"></div>
+    </div>
+</div>
+<app-loading></app-loading>

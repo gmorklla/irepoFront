@@ -20,6 +20,7 @@ export class IssuesComponent implements OnInit {
   searchField: FormControl;
   term = 'engineer';
   status = '';
+  order = 'severity';
   load = false;
 
   constructor(
@@ -77,7 +78,7 @@ export class IssuesComponent implements OnInit {
       data: {}
     };
     const dialogRef = this.dialog.open(CreateIssueComponent, data);
-    dialogRef.afterClosed().subscribe(() => this.getAllIssues());
+    dialogRef.afterClosed().subscribe(issues => issues ? this.getAllIssues() : null);
   }
   // Function to get issues filtered by...
   getIssuesBy (word) {

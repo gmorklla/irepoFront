@@ -6,12 +6,6 @@ export const sections = [
       selected: 'not'
     },
     {
-      name: 'Reports',
-      icon: 'equalizer',
-      url: 'reports',
-      selected: 'not'
-    },
-    {
       name: 'Users',
       icon: 'account_box',
       url: 'users',
@@ -19,8 +13,8 @@ export const sections = [
     },
     {
       name: 'Login',
-      icon: '',
-      url: '',
+      icon: 'home',
+      url: 'login',
       selected: 'not'
     },
 ];

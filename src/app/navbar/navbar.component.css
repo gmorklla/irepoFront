@@ -5,7 +5,12 @@
 }
 
 .mainToolbar {
+    padding: 0 40px;
     box-shadow: 0 3px 5px -1px rgba(0,0,0,.2), 0 6px 10px 0 rgba(0,0,0,.14), 0 1px 18px 0 rgba(0,0,0,.12);
+}
+
+.mainToolbar button {
+    min-width: auto !important;
 }
 
 .spacer {
@@ -17,17 +22,19 @@
 }
 
 .menu {
-    margin: 0 14px !important;
+    display: none;
 }
 
 .submenu {
-    padding: 0 85px;
+    padding: 0 40px;
     height: 80px;
     letter-spacing: 5px;
+    background-color: darkslateblue;
+    color: white;
 }
 
 .submenu mat-icon {
-    margin: 0 14px;
+    margin: 0 14px 0 0;
 }
 
 mat-icon {
@@ -53,5 +60,8 @@ mat-icon {
     }
     .submenu {
         margin-bottom: 50px;
+    }
+    .mainToolbar, .submenu {
+        padding: 0 16px;
     }
 }

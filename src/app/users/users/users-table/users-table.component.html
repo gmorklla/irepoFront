@@ -12,21 +12,37 @@
         <mat-header-cell *matHeaderCellDef> Delete </mat-header-cell>
         <mat-cell *matCellDef="let row">
           <button mat-icon-button color="warn" (click)="deleteUser(row)">
-            <mat-icon aria-label="Change role">delete</mat-icon>
+            <mat-icon aria-label="Delete user">delete</mat-icon>
           </button>
         </mat-cell>
       </ng-container>
 
-      <!-- Day Column -->
+      <!-- Role Column -->
+      <ng-container matColumnDef="change">
+        <mat-header-cell *matHeaderCellDef> Role </mat-header-cell>
+        <mat-cell *matCellDef="let row">
+          <button mat-icon-button (click)="changeRole(row)">
+            <mat-icon aria-label="Change role">autorenew</mat-icon>
+          </button>
+        </mat-cell>
+      </ng-container>
+
+      <!-- Email Column -->
       <ng-container matColumnDef="email">
-        <mat-header-cell *matHeaderCellDef mat-sort-header> User </mat-header-cell>
+        <mat-header-cell *matHeaderCellDef> User </mat-header-cell>
         <mat-cell *matCellDef="let element"> {{element.email}} </mat-cell>
       </ng-container>
 
-      <!-- Task Column -->
+      <!-- Admin Column -->
+      <ng-container matColumnDef="admin">
+        <mat-header-cell *matHeaderCellDef>Admin</mat-header-cell>
+        <mat-cell *matCellDef="let element"> <div class="circle" [ngStyle]="{ 'background-color': element.admin ? 'yellowgreen' : 'crimson' }"></div> </mat-cell>
+      </ng-container>
+
+      <!-- Created date Column -->
       <ng-container matColumnDef="created">
         <mat-header-cell *matHeaderCellDef mat-sort-header> Created </mat-header-cell>
-        <mat-cell *matCellDef="let element"> {{element.created | date}} </mat-cell>
+        <mat-cell *matCellDef="let element"> {{element.created | date:'medium'}} </mat-cell>
       </ng-container>
 
       <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
