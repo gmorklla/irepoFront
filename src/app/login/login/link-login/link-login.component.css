@@ -9,3 +9,7 @@ mat-form-field {
 button {
     width: 100%;
 }
+
+.loginBtns {
+    display: flex;
+}

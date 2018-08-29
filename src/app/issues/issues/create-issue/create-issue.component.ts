@@ -54,7 +54,7 @@ export class CreateIssueComponent implements OnInit {
   }
 
   getUsers () {
-    const endpoint = 'http://localhost:3000/user/all';
+    const endpoint = 'http://localhost:3100/user/all';
     const params = { };
     this.http.getRequest(endpoint, params).subscribe(users => this.users = users);
   }
@@ -64,7 +64,7 @@ export class CreateIssueComponent implements OnInit {
   }
 
   createIssue () {
-    const endpoint = 'http://localhost:3000/create';
+    const endpoint = 'http://localhost:3100/create';
     const params = {
       engineer: this.addIssue.get('engineer').value,
       title: this.addIssue.get('title').value,
@@ -96,7 +96,7 @@ export class CreateIssueComponent implements OnInit {
   }
 
   getTags () {
-    const endpoint = 'http://localhost:3000/tags';
+    const endpoint = 'http://localhost:3100/tags';
     const params = {};
     this.http.getRequest(endpoint, params)
       .subscribe(tags => this.tagsDb = tags[0].list);

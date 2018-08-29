@@ -3,7 +3,7 @@ import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms'
 import { AngularFireAuth } from 'angularfire2/auth';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
-import { map, distinctUntilChanged, debounceTime } from 'rxjs/operators';
+import { map, distinctUntilChanged, debounceTime, zip } from 'rxjs/operators';
 import { ErrorSnackService } from '../../../shared/services/error-snack.service';
 import { HttpRequestService } from '../../../shared/services/http-request.service';
 import { AuthService } from '../../../shared/services/auth.service';
@@ -17,8 +17,9 @@ export class LinkLoginComponent implements OnInit {
 
   loginForm: FormGroup;
   user;
-  users;
+  users: Observable<any>;
   email: string;
+  userInDb = false;
 
   constructor(
     private fb: FormBuilder,
@@ -31,79 +32,39 @@ export class LinkLoginComponent implements OnInit {
 
   ngOnInit() {
     const opts = {
-      email: [ '', [Validators.required, Validators.email, ValidateDomain] ]
+      email: [ '', [Validators.required, Validators.email, ValidateDomain] ],
+      password: [ '', [Validators.required, ValidatePassword]]
     };
     this.loginForm = this.fb.group(opts);
     this.auth.user$.subscribe(user => this.user = user);
-    const url = this.router.url;
-    if (url.includes('signIn')) {
-      this.confirmSignIn(url);
-    }
+    this.users = this.http.getRequest('http://localhost:3100/user/all', {});
+    this.loginForm.get('email').valueChanges
+      .switchMap(input => this.users
+        .map(users => {
+          const inOrNot = users.findIndex(user => {
+            const reg = new RegExp(input, 'gi');
+            return reg.test(user.email);
+          });
+          return inOrNot !== -1 ? true : false;
+        })
+      ).subscribe(val => this.userInDb = val);
   }
 
-  findUserInDb (data): Observable<any> {
-    const user = data ? data.toJSON() : null;
-    if (user) {
-      const endpoint = 'http://localhost:3000/user/find';
-      const params = { email: user.email };
-      return this.http.getRequest(endpoint, params);
-    } else {
-      return Observable.of(null);
-    }
-  }
 
   saveUserInDb (user): Observable<any> {
-    const endpoint = 'http://localhost:3000/user/create';
+    const endpoint = 'http://localhost:3100/user/create';
     const params = { email: user.email, id: user.uid };
     return this.http.getRequest(endpoint, params);
-  }
-
-  async sendEmailLink () {
-    const actionCodeSettings = {
-      // Your redirect URL
-      url: 'http://localhost:4200/login',
-      handleCodeInApp: true
-    };
-
-    try {
-      await this.afAuth.auth.sendSignInLinkToEmail(
-        this.loginForm.get('email').value,
-        actionCodeSettings
-      );
-      window.localStorage.setItem('emailForSignIn', this.loginForm.get('email').value);
-      this.errorSnack.openSnackBar('Please check your email. We sent you an email with your login link', 'Ok');
-    } catch (err) {
-      this.errorSnack.openSnackBar(err.message, 'Ok');
-    }
-  }
-
-  async confirmSignIn(url) {
-    try {
-      if (this.afAuth.auth.isSignInWithEmailLink(url)) {
-        let email = window.localStorage.getItem('emailForSignIn');
-
-        // If missing email, prompt user for it
-        if (!email) {
-          email = window.prompt('Please provide your email for confirmation');
-        }
-
-        // Signin user and remove the email localStorage
-        await this.afAuth.auth.signInWithEmailLink(email, url).then(val => {
-          if (val) {
-            this.saveUser(val);
-          }
-        });
-      }
-    } catch (err) {
-      this.errorSnack.openSnackBar(err.message, 'Ok');
-    }
   }
 
   saveUser (val) {
     this.saveUserInDb(val.user).subscribe(res => {
       this.errorSnack.openSnackBar('Welcome!', 'OK');
-      window.localStorage.removeItem('emailForSignIn');
     });
+    this.redirect();
+  }
+
+  redirect() {
     setTimeout(() => {
       this.router.navigate(['issues']);
     }, 500);
@@ -111,6 +72,35 @@ export class LinkLoginComponent implements OnInit {
 
   logout() {
     this.afAuth.auth.signOut();
+    this.router.navigate(['/']);
+  }
+
+  signUpWithEmail() {
+    const email = this.loginForm.get('email').value;
+    const password = this.loginForm.get('password').value;
+    return this.afAuth.auth.createUserWithEmailAndPassword(email, password)
+      .then((user) => {
+        this.user = user;
+        this.saveUser(user);
+      })
+      .catch(error => {
+        console.log(error);
+        throw error;
+      });
+  }
+
+  loginWithEmail() {
+    const email = this.loginForm.get('email').value;
+    const password = this.loginForm.get('password').value;
+    return this.afAuth.auth.signInWithEmailAndPassword(email, password)
+      .then((user) => {
+        this.user = user;
+        this.redirect();
+      })
+      .catch(error => {
+        console.log(error);
+        throw error;
+      });
   }
 
 }
@@ -120,4 +110,9 @@ import { AbstractControl } from '@angular/forms';
 export function ValidateDomain(control: AbstractControl) {
   const validation = /(gmail.com|hotmail.com|intelmas.com)$/.test(control.value);
   return validation ? null : { validDomain: true };
+}
+
+export function ValidatePassword(control: AbstractControl) {
+  const validation = /(?=^.{8,}$)(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?!.*\s).*$/.test(control.value);
+  return validation ? null : { validPassword: true };
 }

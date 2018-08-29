@@ -14,8 +14,14 @@
       <mat-form-field [floatLabel]="'never'">
         <input placeholder="User email" matInput type="email" formControlName="email">
       </mat-form-field>
-
-      <button mat-raised-button color="primary" [disabled]="loginForm.status === 'INVALID'" (click)="sendEmailLink()">Get login link</button>
+      <mat-form-field [floatLabel]="'never'">
+        <input placeholder="Password" matInput type="password" formControlName="password">
+      </mat-form-field>
+      <div class="loginBtns">
+        <button mat-raised-button color="primary" [disabled]="loginForm.status === 'INVALID' || userInDb" (click)="signUpWithEmail()">Sign up</button>
+        &nbsp;
+        <button mat-raised-button color="warn" [disabled]="loginForm.status === 'INVALID'|| !userInDb" (click)="loginWithEmail()">Login</button>
+      </div>
     </form>
   </ng-template>
 

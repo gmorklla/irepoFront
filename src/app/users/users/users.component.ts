@@ -33,13 +33,13 @@ export class UsersComponent implements OnInit {
   }
 
   getAllUsers(): Observable<any> {
-    const endpoint = 'http://localhost:3000/user/all';
+    const endpoint = 'http://localhost:3100/user/all';
     const params = { };
     return this.http.getRequest(endpoint, params);
   }
 
   switchRole (e) {
-    const endpoint = 'http://localhost:3000/switchRole';
+    const endpoint = 'http://localhost:3100/switchRole';
     const params = {
       id: e._id,
       engineer: this.user.email

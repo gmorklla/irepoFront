@@ -25,7 +25,7 @@ export class AuthService {
   findUserInDb (data): Observable<any> {
     const user = data ? data.toJSON() : null;
     if (user) {
-      const endpoint = 'http://localhost:3000/user/find';
+      const endpoint = 'http://localhost:3100/user/find';
       const params = { email: user.email };
       return this.http.getRequest(endpoint, params);
     } else {

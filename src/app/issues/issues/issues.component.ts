@@ -53,7 +53,7 @@ export class IssuesComponent implements OnInit {
   // Function to get all issues
   getAllIssues () {
     this.load = true;
-    const endpoint = 'http://localhost:3000/issues';
+    const endpoint = 'http://localhost:3100/issues';
     const params = { };
     this.http.getRequest(endpoint, params)
       .map(iss => {
@@ -82,7 +82,7 @@ export class IssuesComponent implements OnInit {
   }
   // Function to get issues filtered by...
   getIssuesBy (word) {
-    const endpoint = 'http://localhost:3000/issues';
+    const endpoint = 'http://localhost:3100/issues';
     const params = { };
     params[this.term] = word;
     return this.http.getRequest(endpoint, params);

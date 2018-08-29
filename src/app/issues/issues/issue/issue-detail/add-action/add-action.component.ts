@@ -18,7 +18,7 @@ export class AddActionComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private http: HttpRequestService,
-    private auth: AuthService,
+    public auth: AuthService,
     private dialogRef: MatDialogRef<AddActionComponent>,
     @Inject(MAT_DIALOG_DATA) private data: any,
     private errorSnack: ErrorSnackService
@@ -34,7 +34,7 @@ export class AddActionComponent implements OnInit {
   }
 
   createAction () {
-    const endpoint = 'http://localhost:3000/actions/create';
+    const endpoint = 'http://localhost:3100/actions/create';
     const params = {
       id: this.data.issue.value._id,
       title: this.addAction.get('title').value,
