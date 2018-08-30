@@ -26,7 +26,8 @@ import {
   MatRadioModule,
   MatSlideToggleModule,
   MatAutocompleteModule,
-  MatButtonToggleModule
+  MatButtonToggleModule,
+  MatBadgeModule
 } from '@angular/material';
 
 @NgModule({
@@ -57,7 +58,8 @@ import {
     MatRadioModule,
     MatSlideToggleModule,
     MatAutocompleteModule,
-    MatButtonToggleModule
+    MatButtonToggleModule,
+    MatBadgeModule
   ],
   exports: [
     MatButtonModule,
@@ -85,7 +87,8 @@ import {
     MatRadioModule,
     MatSlideToggleModule,
     MatAutocompleteModule,
-    MatButtonToggleModule
+    MatButtonToggleModule,
+    MatBadgeModule
   ],
   declarations: []
 })

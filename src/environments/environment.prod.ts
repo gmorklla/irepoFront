@@ -7,5 +7,6 @@ export const environment = {
     projectId: 'i-repository',
     storageBucket: '',
     messagingSenderId: '701566087976'
-  }
+  },
+  url: '187.163.52.165:3100'
 };

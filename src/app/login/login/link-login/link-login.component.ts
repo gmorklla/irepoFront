@@ -3,10 +3,10 @@ import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms'
 import { AngularFireAuth } from 'angularfire2/auth';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
-import { map, distinctUntilChanged, debounceTime, zip } from 'rxjs/operators';
 import { ErrorSnackService } from '../../../shared/services/error-snack.service';
 import { HttpRequestService } from '../../../shared/services/http-request.service';
 import { AuthService } from '../../../shared/services/auth.service';
+import { environment } from '../../../../environments/environment';
 
 @Component({
   selector: 'app-link-login',
@@ -20,6 +20,7 @@ export class LinkLoginComponent implements OnInit {
   users: Observable<any>;
   email: string;
   userInDb = false;
+  url: string = environment.url;
 
   constructor(
     private fb: FormBuilder,
@@ -37,7 +38,7 @@ export class LinkLoginComponent implements OnInit {
     };
     this.loginForm = this.fb.group(opts);
     this.auth.user$.subscribe(user => this.user = user);
-    this.users = this.http.getRequest('http://187.163.52.165:3100/user/all', {});
+    this.users = this.http.getRequest('http://' + this.url + '/user/all', {});
     this.loginForm.get('email').valueChanges
       .switchMap(input => this.users
         .map(users => {

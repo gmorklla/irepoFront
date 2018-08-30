@@ -1,7 +1,7 @@
 <mat-card [@appear]="appearIn">
     <mat-card-header>
       <mat-card-title>
-          {{(issue$ | async)?.issue.title}}
+        {{(issue$ | async)?.issue.title}}
       </mat-card-title>
       <mat-card-subtitle>
         <div matTooltip="Description" [matTooltipPosition]="'right'">
@@ -32,14 +32,25 @@
           <mat-icon aria-label="Labels">label</mat-icon>
           <span class="tag" *ngFor="let tag of (issue$ | async)?.tags; let i = index">{{tag}}</span>
         </div>
+        <div matTooltip="User" [matTooltipPosition]="'right'">
+          <mat-icon aria-label="User">account_box</mat-icon>
+          {{(issue$ | async)?.engineer.email}}
+        </div>
       </mat-card-subtitle>
     </mat-card-header>
   <mat-card-content>
     <h3>Actions</h3>
-    <div class="actions" *ngFor="let action of (issue$ | async)?.issue.actions">
+    <div class="actions" *ngFor="let action of (issue$ | async)?.issue.actions; let i = index" [ngStyle]="{'background-color': i % 2 !== 0 ? 'ghostwhite' : '#f1f1f9'}">
       <div>
-        <mat-icon mat-list-icon>feedback</mat-icon>
+        <mat-icon class="actionTitleIcon" mat-list-icon>feedback</mat-icon>
         <h4 mat-line>{{action.action}}</h4>
+        <span class="spacer"></span>
+        <button mat-icon-button matBadge="{{action.votes.likes.length}}" matBadgeOverlap="true" matBadgePosition="after" matBadgeColor="warn" (click)="like(action._id)">
+          <mat-icon color="warn" aria-label="Like">thumb_up</mat-icon>
+        </button>
+        <button mat-icon-button matBadge="{{action.votes.dislikes.length}}" matBadgeOverlap="true" matBadgePosition="after" matBadgeColor="warn" (click)="dislike(action._id)">
+          <mat-icon color="warn" aria-label="Dislike">thumb_down</mat-icon>
+        </button>
       </div>
       <p>{{action.description}}</p>
       <div class="description">

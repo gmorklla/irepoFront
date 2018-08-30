@@ -5,6 +5,7 @@ import { CreateIssueComponent } from './create-issue/create-issue.component';
 import { animations } from '../../shared/config/animations';
 import { BehaviorSubject } from 'rxjs-compat';
 import { FormControl } from '@angular/forms';
+import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'app-issues',
@@ -22,6 +23,7 @@ export class IssuesComponent implements OnInit {
   status = '';
   order = 'severity';
   load = false;
+  url: string = environment.url;
 
   constructor(
     private http: HttpRequestService,
@@ -53,7 +55,7 @@ export class IssuesComponent implements OnInit {
   // Function to get all issues
   getAllIssues () {
     this.load = true;
-    const endpoint = 'http://187.163.52.165:3100/issues';
+    const endpoint = 'http://' + this.url + '/issues';
     const params = { };
     this.http.getRequest(endpoint, params)
       .map(iss => {
@@ -82,7 +84,7 @@ export class IssuesComponent implements OnInit {
   }
   // Function to get issues filtered by...
   getIssuesBy (word) {
-    const endpoint = 'http://187.163.52.165:3100/issues';
+    const endpoint = 'http://' + this.url + '/issues';
     const params = { };
     params[this.term] = word;
     return this.http.getRequest(endpoint, params);

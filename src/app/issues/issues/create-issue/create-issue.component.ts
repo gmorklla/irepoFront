@@ -5,6 +5,7 @@ import { HttpRequestService } from '../../../shared/services/http-request.servic
 import { ErrorSnackService } from '../../../shared/services/error-snack.service';
 import { Observable } from 'rxjs/Observable';
 import { startWith, map } from 'rxjs/operators';
+import { environment } from '../../../../environments/environment';
 
 @Component({
   selector: 'app-create-issue',
@@ -19,6 +20,7 @@ export class CreateIssueComponent implements OnInit {
   tagsDb: Array<string> = [];
   filteredTags: Observable<string[]>;
   myControl = new FormControl();
+  url: string = environment.url;
 
   constructor(
     private fb: FormBuilder,
@@ -54,7 +56,7 @@ export class CreateIssueComponent implements OnInit {
   }
 
   getUsers () {
-    const endpoint = 'http://187.163.52.165:3100/user/all';
+    const endpoint = 'http://' + this.url + '/user/all';
     const params = { };
     this.http.getRequest(endpoint, params).subscribe(users => this.users = users);
   }
@@ -64,7 +66,7 @@ export class CreateIssueComponent implements OnInit {
   }
 
   createIssue () {
-    const endpoint = 'http://187.163.52.165:3100/create';
+    const endpoint = 'http://' + this.url + '/create';
     const params = {
       engineer: this.addIssue.get('engineer').value,
       title: this.addIssue.get('title').value,
@@ -96,10 +98,10 @@ export class CreateIssueComponent implements OnInit {
   }
 
   getTags () {
-    const endpoint = 'http://187.163.52.165:3100/tags';
+    const endpoint = 'http://' + this.url + '/tags';
     const params = {};
     this.http.getRequest(endpoint, params)
-      .subscribe(tags => this.tagsDb = tags[0].list);
+      .subscribe(tags => this.tagsDb = tags[0] ? tags[0].list : []);
   }
 
 }

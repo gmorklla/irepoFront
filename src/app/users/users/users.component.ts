@@ -4,6 +4,7 @@ import { HttpRequestService } from '../../shared/services/http-request.service';
 import { animations } from '../../shared/config/animations';
 import { AuthService } from '../../shared/services/auth.service';
 import { ErrorSnackService } from '../../shared/services/error-snack.service';
+import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'app-users',
@@ -16,6 +17,7 @@ export class UsersComponent implements OnInit {
   appearIn = 'inactive';
   users;
   user;
+  url: string = environment.url;
 
   constructor(
     private http: HttpRequestService,
@@ -33,13 +35,13 @@ export class UsersComponent implements OnInit {
   }
 
   getAllUsers(): Observable<any> {
-    const endpoint = 'http://187.163.52.165:3100/user/all';
+    const endpoint = 'http://' + this.url +'/user/all';
     const params = { };
     return this.http.getRequest(endpoint, params);
   }
 
   switchRole (e) {
-    const endpoint = 'http://187.163.52.165:3100/switchRole';
+    const endpoint = 'http://' + this.url +'/switchRole';
     const params = {
       id: e._id,
       engineer: this.user.email

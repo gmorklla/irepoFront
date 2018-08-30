@@ -4,6 +4,7 @@ import { HttpRequestService } from '../../../../../shared/services/http-request.
 import { AuthService } from '../../../../../shared/services/auth.service';
 import { ErrorSnackService } from '../../../../../shared/services/error-snack.service';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { environment } from '../../../../../../environments/environment';
 
 @Component({
   selector: 'app-add-action',
@@ -14,6 +15,7 @@ export class AddActionComponent implements OnInit {
 
   addAction: FormGroup;
   user;
+  url: string = environment.url;
 
   constructor(
     private fb: FormBuilder,
@@ -34,7 +36,7 @@ export class AddActionComponent implements OnInit {
   }
 
   createAction () {
-    const endpoint = 'http://187.163.52.165:3100/actions/create';
+    const endpoint = 'http://' + this.url + '/actions/create';
     const params = {
       id: this.data.issue.value._id,
       title: this.addAction.get('title').value,

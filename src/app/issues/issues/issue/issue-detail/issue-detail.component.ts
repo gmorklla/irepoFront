@@ -8,6 +8,7 @@ import { AddActionComponent } from './add-action/add-action.component';
 import { AuthService } from '../../../../shared/services/auth.service';
 import { ErrorSnackService } from '../../../../shared/services/error-snack.service';
 import { Observable } from 'rxjs/Observable';
+import { environment } from '../../../../../environments/environment';
 
 @Component({
   selector: 'app-issue-detail',
@@ -21,6 +22,7 @@ export class IssueDetailComponent implements OnInit {
   issue$: BehaviorSubject<any> = new BehaviorSubject(null);
   appearIn = 'inactive';
   user;
+  url: string = environment.url;
 
   constructor(
     private route: ActivatedRoute,
@@ -40,7 +42,7 @@ export class IssueDetailComponent implements OnInit {
   }
 
   getIssueData () {
-    const endpoint = 'http://187.163.52.165:3100/issues';
+    const endpoint = 'http://' + this.url + '/issues';
     const params = { id: this.id };
     this.http.getRequest(endpoint, params)
       .subscribe(data => {
@@ -77,7 +79,7 @@ export class IssueDetailComponent implements OnInit {
   }
 
   closeCall (): Observable<any> {
-    const endpoint = 'http://187.163.52.165:3100/close';
+    const endpoint = 'http://' + this.url + '/close';
     const params = {
       id: this.id,
       engineer: this.user.email,
@@ -101,12 +103,34 @@ export class IssueDetailComponent implements OnInit {
   }
 
   reopenCall (): Observable<any> {
-    const endpoint = 'http://187.163.52.165:3100/reopen';
+    const endpoint = 'http://' + this.url + '/reopen';
     const params = {
       id: this.id,
       engineer: this.user.email,
     };
     return this.http.getRequest(endpoint, params);
+  }
+
+  like (id: string): void {
+    const endpoint = 'http://' + this.url + '/action/like';
+    const params = {
+      issue: this.id,
+      engineer: this.user.email,
+      action: id
+    };
+    this.http.getRequest(endpoint, params)
+      .subscribe(issue => issue ? this.issue$.next(issue) : null);
+  }
+
+  dislike (id: string): void {
+    const endpoint = 'http://' + this.url + '/action/dislike';
+    const params = {
+      issue: this.id,
+      engineer: this.user.email,
+      action: id
+    };
+    this.http.getRequest(endpoint, params)
+      .subscribe(issue => issue ? this.issue$.next(issue) : null);
   }
 
 }
