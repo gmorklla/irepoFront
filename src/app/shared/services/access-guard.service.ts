@@ -23,7 +23,7 @@ export class AccessGuardService implements CanActivate {
     return this.auth.user$
       .map(auth => {
         const login = auth ? true : false;
-        const admin = login ? auth.admin ? true : false : false;
+        const admin = login ? this.auth.admin$.value ? true : false : false;
         return requiresAdmin ? admin : login;
       })
       .do(authenticated => {

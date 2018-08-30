@@ -34,7 +34,7 @@ export class AddActionComponent implements OnInit {
   }
 
   createAction () {
-    const endpoint = 'http://localhost:3100/actions/create';
+    const endpoint = 'http://187.163.52.165:3100/actions/create';
     const params = {
       id: this.data.issue.value._id,
       title: this.addAction.get('title').value,

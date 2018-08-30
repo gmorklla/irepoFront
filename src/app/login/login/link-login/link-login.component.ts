@@ -37,7 +37,7 @@ export class LinkLoginComponent implements OnInit {
     };
     this.loginForm = this.fb.group(opts);
     this.auth.user$.subscribe(user => this.user = user);
-    this.users = this.http.getRequest('http://localhost:3100/user/all', {});
+    this.users = this.http.getRequest('http://187.163.52.165:3100/user/all', {});
     this.loginForm.get('email').valueChanges
       .switchMap(input => this.users
         .map(users => {
@@ -50,20 +50,6 @@ export class LinkLoginComponent implements OnInit {
       ).subscribe(val => this.userInDb = val);
   }
 
-
-  saveUserInDb (user): Observable<any> {
-    const endpoint = 'http://localhost:3100/user/create';
-    const params = { email: user.email, id: user.uid };
-    return this.http.getRequest(endpoint, params);
-  }
-
-  saveUser (val) {
-    this.saveUserInDb(val.user).subscribe(res => {
-      this.errorSnack.openSnackBar('Welcome!', 'OK');
-    });
-    this.redirect();
-  }
-
   redirect() {
     setTimeout(() => {
       this.router.navigate(['issues']);
@@ -74,29 +60,22 @@ export class LinkLoginComponent implements OnInit {
     this.afAuth.auth.signOut();
     this.router.navigate(['/']);
   }
-
+  // Create
   signUpWithEmail() {
     const email = this.loginForm.get('email').value;
     const password = this.loginForm.get('password').value;
     return this.afAuth.auth.createUserWithEmailAndPassword(email, password)
-      .then((user) => {
-        this.user = user;
-        this.saveUser(user);
-      })
+      .then((user) => console.log('login', user))
       .catch(error => {
         console.log(error);
         throw error;
       });
   }
-
+  // Login
   loginWithEmail() {
     const email = this.loginForm.get('email').value;
     const password = this.loginForm.get('password').value;
     return this.afAuth.auth.signInWithEmailAndPassword(email, password)
-      .then((user) => {
-        this.user = user;
-        this.redirect();
-      })
       .catch(error => {
         console.log(error);
         throw error;

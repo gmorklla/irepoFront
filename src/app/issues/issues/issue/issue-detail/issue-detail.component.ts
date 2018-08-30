@@ -40,7 +40,7 @@ export class IssueDetailComponent implements OnInit {
   }
 
   getIssueData () {
-    const endpoint = 'http://localhost:3100/issues';
+    const endpoint = 'http://187.163.52.165:3100/issues';
     const params = { id: this.id };
     this.http.getRequest(endpoint, params)
       .subscribe(data => {
@@ -77,7 +77,7 @@ export class IssueDetailComponent implements OnInit {
   }
 
   closeCall (): Observable<any> {
-    const endpoint = 'http://localhost:3100/close';
+    const endpoint = 'http://187.163.52.165:3100/close';
     const params = {
       id: this.id,
       engineer: this.user.email,
@@ -101,7 +101,7 @@ export class IssueDetailComponent implements OnInit {
   }
 
   reopenCall (): Observable<any> {
-    const endpoint = 'http://localhost:3100/reopen';
+    const endpoint = 'http://187.163.52.165:3100/reopen';
     const params = {
       id: this.id,
       engineer: this.user.email,
