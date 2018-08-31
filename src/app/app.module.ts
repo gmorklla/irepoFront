@@ -13,13 +13,13 @@ import { HttpRequestService } from './shared/services/http-request.service';
 import { CheckUserService } from './shared/services/check-user.service';
 import { WHeightService } from './shared/services/w-height.service';
 import { AuthService } from './shared/services/auth.service';
-import { AppRoutes } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { CustomMaterialModule } from './custom-material/custom-material.module';
 import { SideMenuComponent } from './side-menu/side-menu.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { LoadingComponent } from './loading/loading.component';
 import { FiltersModule } from './filters/filters.module';
+import { AppRoutes } from './app-routing.module';
 
 @NgModule({
   declarations: [
@@ -32,11 +32,11 @@ import { FiltersModule } from './filters/filters.module';
     BrowserModule,
     HttpModule,
     BrowserAnimationsModule,
-    AppRoutes,
     CustomMaterialModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireAuthModule,
     FiltersModule,
+    AppRoutes,
   ],
   providers: [
     AccessGuardService,
