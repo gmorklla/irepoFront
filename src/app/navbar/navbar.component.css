@@ -54,6 +54,30 @@ mat-icon {
     text-transform: capitalize;
 }
 
+.loginContainer {
+    padding: 0 20px;
+    display: flex;
+    align-items: center;
+    border-right: 1px solid rgba(255, 255, 255, 0.5);
+}
+
+.user {
+    font-size: small;
+}
+
+.uCircle {
+    width: 30px;
+    height: 30px;
+    margin: 0 10px;
+    border-radius: 50%;
+    background-color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-transform: uppercase;
+    color: #e81e63;
+}
+
 @media all and (max-width: 800px) {
     .name {
         letter-spacing: 0;

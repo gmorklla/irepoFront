@@ -73,8 +73,8 @@ export class IssuesComponent implements OnInit {
   // Function to open dialog to create new issue
   createIssue () {
     const data = {
-      maxWidth: '80vh',
-      width: '80vh',
+      maxWidth: '100vh',
+      width: '100vh',
       maxHeight: '100vh',
       height: 'auto',
       data: {}

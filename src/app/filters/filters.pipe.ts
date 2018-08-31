@@ -15,6 +15,13 @@ export class OpenOrClosePipe implements PipeTransform {
 
 }
 
+@Pipe({ name: 'emailF' })
+export class EmailF implements PipeTransform {
+  transform(value) {
+    return value ? value.replace(/@.+/, '') : value;
+  }
+}
+
 @Pipe({
   name: 'orderBy'
 })

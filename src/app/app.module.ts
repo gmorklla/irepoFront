@@ -19,6 +19,7 @@ import { CustomMaterialModule } from './custom-material/custom-material.module';
 import { SideMenuComponent } from './side-menu/side-menu.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { LoadingComponent } from './loading/loading.component';
+import { FiltersModule } from './filters/filters.module';
 
 @NgModule({
   declarations: [
@@ -35,6 +36,7 @@ import { LoadingComponent } from './loading/loading.component';
     CustomMaterialModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireAuthModule,
+    FiltersModule,
   ],
   providers: [
     AccessGuardService,

@@ -18,20 +18,17 @@ export class AuthService {
     private http: HttpRequestService
   ) {
     this.afAuth.authState
-      .subscribe(user => {
-        // console.log('auth service', user);
-        this.user$.next(user);
-        if (user) {
-          this.findUserInDb(user)
-            .subscribe(val => this.admin$.next(val.admin));
-        }
-      });
+      .do(user => this.user$.next(user))
+      .switchMap(user => this.findUserInDb(user))
+      .subscribe(val => this.admin$.next(val.admin));
   }
 
   findUserInDb (data): Observable<any> {
-    const endpoint = 'http://' + this.url + '/user/find';
-    const params = { email: data.email };
-    return this.http.getRequest(endpoint, params).switchMap(val => val ? Observable.of(val) : this.saveUserInDb(data));
+    if (data) {
+      const endpoint = 'http://' + this.url + '/user/find';
+      const params = { email: data.email };
+      return this.http.getRequest(endpoint, params).switchMap(val => val ? Observable.of(val) : this.saveUserInDb(data));
+    } else { return Observable.empty(); }
   }
 
   saveUserInDb (user): Observable<any> {

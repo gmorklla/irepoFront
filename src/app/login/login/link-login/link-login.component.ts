@@ -17,7 +17,6 @@ export class LinkLoginComponent implements OnInit {
 
   loginForm: FormGroup;
   user;
-  users: Observable<any>;
   email: string;
   userInDb = false;
   url: string = environment.url;
@@ -38,23 +37,24 @@ export class LinkLoginComponent implements OnInit {
     };
     this.loginForm = this.fb.group(opts);
     this.auth.user$.subscribe(user => this.user = user);
-    this.users = this.http.getRequest('http://' + this.url + '/user/all', {});
     this.loginForm.get('email').valueChanges
-      .switchMap(input => this.users
-        .map(users => {
-          const inOrNot = users.findIndex(user => {
-            const reg = new RegExp(input, 'gi');
-            return reg.test(user.email);
-          });
-          return inOrNot !== -1 ? true : false;
-        })
-      ).subscribe(val => this.userInDb = val);
+      .switchMap(input => this.inputIsInDb(input))
+      .subscribe(val => this.userInDb = val);
+  }
+  // Function to check if typed match any registered user
+  inputIsInDb (input): Observable<boolean> {
+    return this.http.getRequest('http://' + this.url + '/user/all', {})
+      .map(users => {
+        const inOrNot = users.findIndex(user => {
+          const reg = new RegExp(input, 'gi');
+          return reg.test(user.email);
+        });
+        return inOrNot !== -1 ? true : false;
+      });
   }
 
   redirect() {
-    setTimeout(() => {
-      this.router.navigate(['issues']);
-    }, 500);
+    setTimeout(() => this.router.navigate(['issues']), 500);
   }
 
   logout() {
@@ -65,22 +65,17 @@ export class LinkLoginComponent implements OnInit {
   signUpWithEmail() {
     const email = this.loginForm.get('email').value;
     const password = this.loginForm.get('password').value;
-    return this.afAuth.auth.createUserWithEmailAndPassword(email, password)
-      .then((user) => console.log('login', user))
-      .catch(error => {
-        console.log(error);
-        throw error;
-      });
+    this.afAuth.auth.createUserWithEmailAndPassword(email, password)
+      .then(user => this.redirect())
+      .catch(error => console.log(error));
   }
   // Login
   loginWithEmail() {
     const email = this.loginForm.get('email').value;
     const password = this.loginForm.get('password').value;
-    return this.afAuth.auth.signInWithEmailAndPassword(email, password)
-      .catch(error => {
-        console.log(error);
-        throw error;
-      });
+    this.afAuth.auth.signInWithEmailAndPassword(email, password)
+      .then(user => this.redirect())
+      .catch(error => console.log(error));
   }
 
 }

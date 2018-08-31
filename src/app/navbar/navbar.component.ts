@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
 import { sections } from '../shared/config/data.model';
+import { AuthService } from '../shared/services/auth.service';
+import { Observable } from 'rxjs/Observable';
 
 @Component({
   selector: 'app-navbar',
@@ -10,9 +12,11 @@ import { sections } from '../shared/config/data.model';
 export class NavbarComponent {
   title = '';
   titleIcon = '';
+  user: Observable<any>;
 
   constructor(
-    private router: Router
+    private router: Router,
+    private auth: AuthService
   ) {
     router.events.forEach((event) => {
       if (event instanceof NavigationEnd) {
@@ -22,6 +26,7 @@ export class NavbarComponent {
         this.titleIcon = sections[idx].icon;
       }
     });
+    this.auth.user$.subscribe(user => this.user = user);
   }
 
 }

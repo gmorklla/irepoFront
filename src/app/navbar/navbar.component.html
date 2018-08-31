@@ -3,6 +3,18 @@
     <mat-toolbar-row class="mainToolbar">
         <span matTooltip="Intelma Repository" [matTooltipPosition]="'right'" class="name">IRepo</span>
         <span class="spacer"></span>
+        <ng-container *ngIf="user; else noUser">
+            <div class="loginContainer">
+                <span class="uCircle">{{user.email[0]}}</span>
+                <span class="user">{{user.email | emailF}}</span>
+            </div>
+        </ng-container>
+        <ng-template #noUser>
+            <div class="loginContainer">
+                <span class="uCircle">N</span>
+                <span class="user">Not logged in</span>
+            </div>
+        </ng-template>
         <button mat-button [routerLink]="'/issues'">
             <mat-icon aria-label="Issues">bug_report</mat-icon>
         </button>

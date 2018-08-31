@@ -53,8 +53,8 @@ export class IssueDetailComponent implements OnInit {
 
   addAction () {
     const data = {
-      maxWidth: '80vh',
-      width: '80vh',
+      maxWidth: '100vh',
+      width: '100vh',
       maxHeight: '100vh',
       height: 'auto',
       data: { issue: this.issue$ }
