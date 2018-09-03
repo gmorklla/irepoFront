@@ -21,6 +21,7 @@ export class CreateIssueComponent implements OnInit {
   filteredTags: Observable<string[]>;
   myControl = new FormControl();
   url: string = environment.url;
+  customersDb: Observable<string[]>;
 
   constructor(
     private fb: FormBuilder,
@@ -48,6 +49,7 @@ export class CreateIssueComponent implements OnInit {
     this.addIssue = this.fb.group(opts);
     this.getUsers();
     this.getTags();
+    this.getCustomers();
   }
 
   private _filterTags(value: string): string[] {
@@ -103,5 +105,12 @@ export class CreateIssueComponent implements OnInit {
     this.http.getRequest(endpoint, params)
       .subscribe(tags => this.tagsDb = tags[0] ? tags[0].list : []);
   }
+
+  getCustomers () {
+    const endpoint = 'http://' + this.url + '/customers';
+    const params = {};
+    this.customersDb = this.http.getRequest(endpoint, params)
+      .map(customers => customers[0] ? customers[0].list : []);
+    }
 
 }

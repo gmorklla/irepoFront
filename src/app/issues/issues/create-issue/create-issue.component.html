@@ -28,8 +28,12 @@
     </section>
     <!-- /////////////////////////////////// Customer /////////////////////////////////// -->
     <section class="fullW">
-      <mat-form-field [floatLabel]="'never'">
-        <input matInput placeholder="Customer" formControlName="customer" type="text">
+      <mat-form-field>
+        <mat-select placeholder="Customer" formControlName="customer">
+          <mat-option *ngFor="let customer of customersDb | async" value="customer">
+            {{customer}}
+          </mat-option>
+        </mat-select>
       </mat-form-field>
     </section>
     <!-- /////////////////////////////////// Platform /////////////////////////////////// -->
