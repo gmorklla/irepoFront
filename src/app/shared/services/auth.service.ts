@@ -8,7 +8,6 @@ import { environment } from '../../../environments/environment';
   providedIn: 'root'
 })
 export class AuthService {
-
   user$: ReplaySubject<any> = new ReplaySubject(null);
   admin$: BehaviorSubject<any> = new BehaviorSubject(null);
   url: string = environment.url;
@@ -23,15 +22,19 @@ export class AuthService {
       .subscribe(val => this.admin$.next(val.admin));
   }
 
-  findUserInDb (data): Observable<any> {
+  findUserInDb(data): Observable<any> {
     if (data) {
       const endpoint = 'http://' + this.url + '/user/find';
       const params = { email: data.email };
-      return this.http.getRequest(endpoint, params).switchMap(val => val ? Observable.of(val) : this.saveUserInDb(data));
-    } else { return Observable.empty(); }
+      return this.http
+        .getRequest(endpoint, params)
+        .switchMap(val => (val ? Observable.of(val) : this.saveUserInDb(data)));
+    } else {
+      return Observable.empty();
+    }
   }
 
-  saveUserInDb (user): Observable<any> {
+  saveUserInDb(user): Observable<any> {
     const endpoint = 'http://' + this.url + '/user/create';
     const params = { email: user.email, id: user.uid };
     return this.http.getRequest(endpoint, params);

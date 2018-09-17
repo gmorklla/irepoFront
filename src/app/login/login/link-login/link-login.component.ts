@@ -95,6 +95,23 @@ export class LinkLoginComponent implements OnInit {
         console.log(error);
       });
   }
+  // Reset password
+  resetPassword() {
+    const email = this.loginForm.get('email').value;
+    console.log('reset', email);
+    this.afAuth.auth
+      .sendPasswordResetEmail(email)
+      .then(val =>
+        this.errorSnack.openSnackBar(
+          'Check your email to reset your password!',
+          'Ok'
+        )
+      )
+      .catch(error => {
+        this.errorSnack.openSnackBar(error.message, 'Ok');
+        console.log(error);
+      });
+  }
 }
 
 import { AbstractControl } from '@angular/forms';
