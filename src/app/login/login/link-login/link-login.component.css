@@ -1,15 +1,19 @@
 mat-form-field {
-    width: 100%;
+  width: 100%;
 }
 
 .notification p {
-    text-align: center;
+  text-align: center;
 }
 
 button {
-    width: 100%;
+  width: 100%;
 }
 
 .loginBtns {
-    display: flex;
+  display: flex;
+}
+
+mat-tab-group {
+  align-items: center;
 }

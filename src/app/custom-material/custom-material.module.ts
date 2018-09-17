@@ -27,7 +27,8 @@ import {
   MatSlideToggleModule,
   MatAutocompleteModule,
   MatButtonToggleModule,
-  MatBadgeModule
+  MatBadgeModule,
+  MatTabsModule
 } from '@angular/material';
 
 @NgModule({
@@ -59,7 +60,8 @@ import {
     MatSlideToggleModule,
     MatAutocompleteModule,
     MatButtonToggleModule,
-    MatBadgeModule
+    MatBadgeModule,
+    MatTabsModule
   ],
   exports: [
     MatButtonModule,
@@ -88,8 +90,9 @@ import {
     MatSlideToggleModule,
     MatAutocompleteModule,
     MatButtonToggleModule,
-    MatBadgeModule
+    MatBadgeModule,
+    MatTabsModule
   ],
   declarations: []
 })
-export class CustomMaterialModule { }
+export class CustomMaterialModule {}

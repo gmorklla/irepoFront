@@ -1,5 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
+import {
+  FormGroup,
+  FormBuilder,
+  Validators,
+  FormControl
+} from '@angular/forms';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
@@ -14,11 +19,10 @@ import { environment } from '../../../../environments/environment';
   styleUrls: ['./link-login.component.css']
 })
 export class LinkLoginComponent implements OnInit {
-
   loginForm: FormGroup;
+  signUpForm: FormGroup;
   user;
   email: string;
-  userInDb = false;
   url: string = environment.url;
 
   constructor(
@@ -31,19 +35,25 @@ export class LinkLoginComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    const opts = {
-      email: [ '', [Validators.required, Validators.email, ValidateDomain] ],
-      password: [ '', [Validators.required, ValidatePassword]]
+    const loginOpts = {
+      email: ['', [Validators.required, Validators.email, ValidateDomain]],
+      password: ['', [Validators.required, ValidatePassword]]
     };
-    this.loginForm = this.fb.group(opts);
-    this.auth.user$.subscribe(user => this.user = user);
-    this.loginForm.get('email').valueChanges
-      .switchMap(input => this.inputIsInDb(input))
-      .subscribe(val => this.userInDb = val);
+    const signUpOpts = {
+      email: ['', [Validators.required, Validators.email, ValidateDomain]],
+      password: ['', [Validators.required, ValidatePassword]],
+      confirm: ['', [Validators.required]]
+    };
+    this.loginForm = this.fb.group(loginOpts);
+    this.signUpForm = this.fb.group(signUpOpts, {
+      validator: ConfirmPassword
+    });
+    this.auth.user$.subscribe(user => (this.user = user));
   }
   // Function to check if typed match any registered user
-  inputIsInDb (input): Observable<boolean> {
-    return this.http.getRequest('http://' + this.url + '/user/all', {})
+  inputIsInDb(input): Observable<boolean> {
+    return this.http
+      .getRequest('http://' + this.url + '/user/all', {})
       .map(users => {
         const inOrNot = users.findIndex(user => {
           const reg = new RegExp(input, 'gi');
@@ -63,31 +73,49 @@ export class LinkLoginComponent implements OnInit {
   }
   // Create
   signUpWithEmail() {
-    const email = this.loginForm.get('email').value;
-    const password = this.loginForm.get('password').value;
-    this.afAuth.auth.createUserWithEmailAndPassword(email, password)
+    const email = this.signUpForm.get('email').value;
+    const password = this.signUpForm.get('password').value;
+    this.afAuth.auth
+      .createUserWithEmailAndPassword(email, password)
       .then(user => this.redirect())
-      .catch(error => console.log(error));
+      .catch(error => {
+        this.errorSnack.openSnackBar(error.message, 'Ok');
+        console.log(error);
+      });
   }
   // Login
   loginWithEmail() {
     const email = this.loginForm.get('email').value;
     const password = this.loginForm.get('password').value;
-    this.afAuth.auth.signInWithEmailAndPassword(email, password)
+    this.afAuth.auth
+      .signInWithEmailAndPassword(email, password)
       .then(user => this.redirect())
-      .catch(error => console.log(error));
+      .catch(error => {
+        this.errorSnack.openSnackBar(error.message, 'Ok');
+        console.log(error);
+      });
   }
-
 }
 
 import { AbstractControl } from '@angular/forms';
 
 export function ValidateDomain(control: AbstractControl) {
-  const validation = /(gmail.com|hotmail.com|intelmas.com)$/.test(control.value);
+  const validation = /(gmail.com|hotmail.com|intelmas.com)$/.test(
+    control.value
+  );
   return validation ? null : { validDomain: true };
 }
 
 export function ValidatePassword(control: AbstractControl) {
-  const validation = /(?=^.{8,}$)(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?!.*\s).*$/.test(control.value);
+  const validation = /(?=^.{8,}$)(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?!.*\s).*$/.test(
+    control.value
+  );
+  return validation ? null : { validPassword: true };
+}
+
+export function ConfirmPassword(control: AbstractControl) {
+  const password = control.get('password').value;
+  const confirm = control.get('confirm').value;
+  const validation = password === confirm;
   return validation ? null : { validPassword: true };
 }

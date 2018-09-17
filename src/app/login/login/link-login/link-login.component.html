@@ -1,27 +1,91 @@
+<ng-container *ngIf="user; else login">
 
-  <ng-container *ngIf="user; else login">
+  <div class="notification">
+    <p>Welcome {{user.email}}!</p>
+    <hr>
+    <p><button
+        mat-raised-button
+        color="warn"
+        (click)="logout()"
+        class="button"
+      >Signout</button></p>
+  </div>
 
-    <div class="notification">
-      <p>Welcome {{user.email}}!</p>
-      <hr>
-      <p><button mat-raised-button color="warn" (click)="logout()" class="button">Signout</button></p>
-    </div>
+</ng-container>
 
-  </ng-container>
-
-  <ng-template #login>
-    <form [formGroup]="loginForm" novalidate>
-      <mat-form-field [floatLabel]="'never'">
-        <input placeholder="User email" matInput type="email" formControlName="email">
-      </mat-form-field>
-      <mat-form-field [floatLabel]="'never'">
-        <input placeholder="Password" matInput type="password" formControlName="password">
-      </mat-form-field>
-      <div class="loginBtns">
-        <button mat-raised-button color="primary" [disabled]="loginForm.status === 'INVALID' || userInDb" (click)="signUpWithEmail()">Sign up</button>
-        &nbsp;
-        <button mat-raised-button color="warn" [disabled]="loginForm.status === 'INVALID'|| !userInDb" (click)="loginWithEmail()">Login</button>
-      </div>
-    </form>
-  </ng-template>
-
+<ng-template #login>
+  <mat-tab-group dynamicHeight="true">
+    <!-- //////////////// Login //////////////// -->
+    <mat-tab label="Login">
+      <form
+        [formGroup]="loginForm"
+        novalidate
+      >
+        <mat-form-field [floatLabel]="'never'">
+          <input
+            placeholder="User email"
+            matInput
+            type="email"
+            formControlName="email"
+          >
+        </mat-form-field>
+        <mat-form-field [floatLabel]="'never'">
+          <input
+            placeholder="Password"
+            matInput
+            type="password"
+            formControlName="password"
+          >
+        </mat-form-field>
+        <div class="loginBtns">
+          <button
+            mat-raised-button
+            color="warn"
+            [disabled]="loginForm.status === 'INVALID'"
+            (click)="loginWithEmail()"
+          >Login</button>
+        </div>
+      </form>
+    </mat-tab>
+    <!-- //////////////// Sign up //////////////// -->
+    <mat-tab label="Sign up">
+      <form
+        [formGroup]="signUpForm"
+        novalidate
+      >
+        <mat-form-field [floatLabel]="'never'">
+          <input
+            placeholder="User email"
+            matInput
+            type="email"
+            formControlName="email"
+          >
+        </mat-form-field>
+        <mat-form-field [floatLabel]="'never'">
+          <input
+            placeholder="Password"
+            matInput
+            type="password"
+            formControlName="password"
+          >
+        </mat-form-field>
+        <mat-form-field [floatLabel]="'never'">
+          <input
+            placeholder="Confirm password"
+            matInput
+            type="password"
+            formControlName="confirm"
+          >
+        </mat-form-field>
+        <div class="loginBtns">
+          <button
+            mat-raised-button
+            color="primary"
+            [disabled]="signUpForm.status === 'INVALID'"
+            (click)="signUpWithEmail()"
+          >Sign up</button>
+        </div>
+      </form>
+    </mat-tab>
+  </mat-tab-group>
+</ng-template>
